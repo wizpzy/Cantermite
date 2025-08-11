@@ -16,12 +16,12 @@ export async function POST(req) {
     console.log("Existing User:", existingUser);
 
     if (!existingUser) {
-        return NextResponse.json({ error: "User not found" }, { status: 404 });
+        return NextResponse.json({ error: "Incorrect email or password" }, { status: 401 });
     }
 
     const isPasswordValid = await bcrypt.compare(password, existingUser.password);
     if (!isPasswordValid) {
-        return NextResponse.json({ error: "Invalid password" }, { status: 401 });
+        return NextResponse.json({ error: "Incorrect email or password" }, { status: 401 });
     }
 
     const session = await getIronSession(await cookies(), {password: process.env.SESSION_PASSWORD, cookieName: "authSession"});
