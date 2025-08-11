@@ -1,9 +1,9 @@
 import "dotenv/config";
 import { NextResponse } from "next/server";
-import { getIronSessionData } from "@/lib/session";
+import { getAuthSession } from "@/lib/session";
 
 export async function GET(req) {
-    const session = await getIronSessionData();
+    const session = await getAuthSession();
     if (!session.userId)
         return NextResponse.json({ error: "Unauthorized"}, { status: 401 });
 
