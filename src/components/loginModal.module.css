@@ -1,0 +1,69 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  font-family: var(--font-kanit), sans-serif;
+  color: var(--black);
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px 20px 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.title {
+  margin: 0 0 14px;
+  font-size: 1.25rem;
+}
+
+.form {
+  display: grid;
+  gap: 10px;
+}
+
+.label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--black);
+  outline: none;
+}
+
+.input:focus {
+  border-width: 2px;
+  border-color: var(--black);
+}
+
+.submit {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--darkblue);
+  color: var(--white);
+  border: 0;
+  cursor: pointer;
+}
