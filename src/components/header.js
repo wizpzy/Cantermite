@@ -4,13 +4,11 @@ import HeaderClient from "./headerClient";
 
 export default async function Header() {
     const session = await getAuthSession();
-    console.log(session)
     const isLogin = "userId" in session;
-    const fName = isLogin ? (await getUserById(session.userId, {f_name: true})).f_name : null;
+    const name = isLogin ? (await getUserById(session.userId, {f_name: true, l_name: true})) : null;
     const role = session.role;
-    console.log(fName)
 
     return (
-        <HeaderClient isLogin={isLogin} fName={fName} />
+        <HeaderClient isLogin={isLogin} fName={name?.f_name} lName={name?.l_name} role={role} />
     );
 }
