@@ -1,8 +1,7 @@
-import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { cookies } from "next/headers";
-import { getIronSession } from "iron-session";
+import prisma from "@/lib/prisma";
+import { getAuthSession } from "@/lib/session";
+import { NextResponse } from "next/server";
 import "dotenv/config";
 
 // Login
@@ -24,7 +23,7 @@ export async function POST(req) {
         return NextResponse.json({ error: "Incorrect email or password" }, { status: 401 });
     }
 
-    const session = await getIronSession(await cookies(), {password: process.env.SESSION_PASSWORD, cookieName: "authSession"});
+    const session = await getAuthSession();
     session.userId = existingUser.user_id;
     session.role = existingUser.role;
     await session.save();

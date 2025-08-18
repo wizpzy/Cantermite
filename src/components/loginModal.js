@@ -1,8 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import styles from "./loginModal.module.css";
 
 export default function LoginModal({ onClose }) {
@@ -10,18 +10,15 @@ export default function LoginModal({ onClose }) {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  // Replace this with your real login handler (call your /api/login, then refresh or mutate state)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/login", { email, password });
       console.log("Login successful:", response.data);
-      // Handle successful login (e.g., store token, update user state)
       onClose();
-      router.refresh(); // Refresh the page to update the UI
+      router.refresh();
     } catch (error) {
       console.error("Login failed:", error);
-      // Handle login error (e.g., show error message)
     }
   };
 
