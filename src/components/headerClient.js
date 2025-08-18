@@ -5,6 +5,7 @@ import styles from "./headerClient.module.css";
 import Link from "next/link";
 import SearchBar from "./searchbar";
 import { ChevronDown } from 'lucide-react';
+import { createPortal } from "react-dom";
 import LoginModal from "./loginModal";
 
 export default function HeaderClient({ isLogin, fName }) {
@@ -49,20 +50,17 @@ export default function HeaderClient({ isLogin, fName }) {
                 </div>
             ) : (
                 <div className={styles.authContainer}>
-                    <div className={styles.login}>
-                        {/* <Link href="/login" className={styles.loginLink}>เข้าสู่ระบบ</Link> */}
-                        <button onClick={() => setShowLoginModal(true)} className={styles.textButton}>เข้าสู่ระบบ</button>
-                    </div>
+                    {/* <Link href="/login" className={styles.loginLink}>เข้าสู่ระบบ</Link> */}
+                    <a onClick={() => setShowLoginModal(true)} className={styles.navLink}>เข้าสู่ระบบ</a>
                     <span className={styles.seperator}>|</span>
-                    <div className={styles.register}>
-                        <Link href="/register" className={styles.registerLink}>สมัครสมาชิก</Link>
-                    </div>
+                    <a className={styles.navLink}>สมัครสมาชิก</a>
 
-                    {showLoginModal && (
+                    {showLoginModal && createPortal(
                         <LoginModal onClose={() => setShowLoginModal(false)} />
+                        , document.body
                     )}
                 </div>
             )}
         </div>
-    );
+    )
 }

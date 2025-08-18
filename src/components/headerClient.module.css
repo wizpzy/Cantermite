@@ -25,6 +25,7 @@
     align-items: center;
     text-decoration: none;
     padding: 10px;
+    cursor: pointer;
 }
 
 .dropdown {
@@ -80,12 +81,6 @@
   margin: 0 10px;
 }
 
-.textButton {
-  background: none;
-  border: none;
-  outline: none;
-  font-family: var(--font-kanit), sans-serif;
-  font-size: 14px;
-  color: var(--white);
+.link {
   cursor: pointer;
 }
