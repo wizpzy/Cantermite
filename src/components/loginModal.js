@@ -13,7 +13,8 @@ export default function LoginModal({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/login", { email, password });
+      const rememberMe = document.getElementById("rememberMe").checked;
+      const response = await axios.post("/api/login", { email, password, rememberMe });
       console.log("Login successful:", response.data);
       onClose();
       router.refresh();
@@ -58,7 +59,7 @@ export default function LoginModal({ onClose }) {
 
           <div className={styles.actions}>
             <label className={styles.checkboxWrapper}>
-              <input type="checkbox" className={styles.checkbox} />
+              <input type="checkbox" className={styles.checkbox} id="rememberMe"/>
               <span className={styles.box}>
                 <svg viewBox="0 0 24 24" className={styles.icon}>
                   <path d="M5 13.5l4 4L19 8.5"

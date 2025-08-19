@@ -7,7 +7,7 @@ import "dotenv/config";
 // Login
 export async function POST(req) {
     const body = await req.json();
-    const { email, password } = body;
+    const { email, password, rememberMe } = body;
 
     const existingUser = await prisma.user.findUnique({
         where: { email },
@@ -23,7 +23,7 @@ export async function POST(req) {
         return NextResponse.json({ error: "Incorrect email or password" }, { status: 401 });
     }
 
-    const session = await getAuthSession();
+    const session = await getAuthSession(rememberMe);
     session.userId = existingUser.user_id;
     session.role = existingUser.role;
     await session.save();
