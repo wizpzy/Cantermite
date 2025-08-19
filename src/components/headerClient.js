@@ -7,12 +7,15 @@ import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import LoginModal from "./loginModal";
+import RegisterModal from './registerModal';
 import SearchBar from "./searchbar";
 import styles from "./headerClient.module.css";
 
 export default function HeaderClient({ isLogin, fName, lName, role }) {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showRegisterModal, setShowRegisterModal] = useState(false);
     const router = useRouter();
+
     const handleLogout = async () => {
         try {
             const response = await axios.post("/api/logout");
@@ -75,10 +78,15 @@ export default function HeaderClient({ isLogin, fName, lName, role }) {
                     {/* <Link href="/login" className={styles.loginLink}>เข้าสู่ระบบ</Link> */}
                     <a onClick={() => setShowLoginModal(true)} className={styles.navLink}>เข้าสู่ระบบ</a>
                     <span className={styles.seperator}>|</span>
-                    <a className={styles.navLink}>สมัครสมาชิก</a>
+                    <a onClick={() => setShowRegisterModal(true)} className={styles.navLink}>สมัครสมาชิก</a>
 
                     {showLoginModal && createPortal(
                         <LoginModal onClose={() => setShowLoginModal(false)} />
+                        , document.body
+                    )}
+
+                    {showRegisterModal && createPortal(
+                        <RegisterModal onClose={() => setShowRegisterModal(false)} />
                         , document.body
                     )}
                 </div>
