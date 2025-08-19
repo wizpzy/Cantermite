@@ -61,18 +61,7 @@
 
 .dropdownItem:hover {
   background-color: var(--lightblue);
-}
-
-.dropdownItem:hover {
   color: var(--white);
-}
-
-.profileContainer {
-    /* width: 10vw;
-    height: 100px; */
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .profileIcon {
