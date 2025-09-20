@@ -29,10 +29,10 @@ model book_title {
   book_id    String       @id @db.Char(6)
   title      String       @db.VarChar(100)
   author     String       @db.VarChar(100)
-  publisher  String       @db.VarChar(100)
+  publisher  String?      @db.VarChar(100)
   year       Int
   language   String       @db.VarChar(20)
-  page       Int
+  page       Int?
   image_path String?
   book_copy  book_copy[]
   book_genre book_genre[]
