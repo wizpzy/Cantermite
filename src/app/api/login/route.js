@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import prisma from "@/_lib/prisma";
-import { getAuthSession } from "@/_lib/session";
+import prisma from "@/lib/prisma";
+import { getAuthSession } from "@/lib/session";
 import { NextResponse } from "next/server";
 import "dotenv/config";
 

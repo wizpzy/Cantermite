@@ -1,7 +1,7 @@
 import axios from "axios";
-import BookList from "@/_components/bookList";
-import GenreList from "@/_components/genreList";
-import Section from "@/_components/section";
+import BookList from "@/components/bookList";
+import GenreList from "@/components/genreList";
+import Section from "@/components/section";
 import styles from "./page.module.css";
 
 const getBooks = async () => {

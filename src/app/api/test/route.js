@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { NextResponse } from "next/server";
-import { getAuthSession } from "@/_lib/session";
+import { getAuthSession } from "@/lib/session";
 
 export async function GET(req) {
     const session = await getAuthSession();
