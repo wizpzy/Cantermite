@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    align-items: baseline;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.seeAll {
+    color: var(--lightblue);
+}
+
+.section {
+    /* border: 1px solid red; */
+    margin: 40px;
+}
