@@ -1,5 +1,5 @@
-import { getAuthSession } from "@/lib/session";
-import { getUserById } from "@/lib/db";
+import { getAuthSession } from "@/_lib/session";
+import { getUserById } from "@/_lib/db";
 import HeaderClient from "./headerClient";
 
 export default async function Header() {

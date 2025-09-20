@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import prisma from "@/_lib/prisma";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
