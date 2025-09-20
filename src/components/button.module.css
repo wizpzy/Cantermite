@@ -1,0 +1,10 @@
+.button {
+  font-family: var(--font-kanit), sans-serif;
+  /* margin-top: 8px; */
+  padding: 12px 12px;
+  border-radius: 20px;
+  background: var(--darkblue);
+  color: var(--white);
+  border: 0;
+  cursor: pointer;
+}

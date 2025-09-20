@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
 import styles from "./loginModal.module.css";
+import Button from "./button";
 
 export default function LoginModal({ onClose }) {
   const [email, setEmail] = useState("");
@@ -75,7 +76,7 @@ export default function LoginModal({ onClose }) {
             <a className={styles.labelText} href="#">ลืมรหัสผ่าน ?</a>
           </div>
 
-          <button className={styles.submit} type="submit">เข้าสู่ระบบ</button>
+          <Button type="submit">เข้าสู่ระบบ</Button>
         </form>
       </div>
     </div>

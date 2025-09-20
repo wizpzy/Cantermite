@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
+import Button from "./button";
 import styles from "./registerModal.module.css";
 
 export default function RegisterModal({ onClose }) {
@@ -101,7 +102,7 @@ export default function RegisterModal({ onClose }) {
             />
           </label>
 
-          <button className={styles.submit} type="submit">ลงทะเบียน</button>
+          <Button type="submit" >ลงทะเบียน</Button>
         </form>
       </div>
     </div>
