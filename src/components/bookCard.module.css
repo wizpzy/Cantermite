@@ -38,6 +38,11 @@
     min-height: calc(1.5em * 2);
 }
 
-.detailsButton {
-    margin-top: auto;
+.linkButton {
+    text-align: center;
+    font-family: var(--font-kanit), sans-serif;
+    padding: 12px 12px;
+    border-radius: 20px;
+    background: var(--darkblue);
+    color: var(--white);
 }

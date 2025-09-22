@@ -1,5 +1,5 @@
-import Button from './button';
 import { CircleUserRound } from 'lucide-react';
+import Button from './button';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './bookCard.module.css';
@@ -17,9 +17,7 @@ export default function BookCard({ bookId, title, author, year, language, imageP
                     </span>
                     {author}
                 </span>
-                <Button className={styles.detailsButton}>
-                    <Link href={`/books/${bookId}`}>ดูรายละเอียด</Link>
-                </Button>
+                <Link href={`/books/${bookId}`} className={styles.linkButton}>ดูรายละเอียด</Link>
                 {/* <span className={styles.language}>{language}</span> */}
             </div>
         </div>
