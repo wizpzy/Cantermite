@@ -6,3 +6,17 @@ export async function getUserById(userId, select = null) {
         select
     });
 }
+
+export async function getBookById(bookId) {
+    return await prisma.book_title.findUnique({
+        where: { book_id: bookId }
+    });
+}
+
+export async function getUserCurrentTier(userId) {
+    return (await prisma.subscription.findFirst({
+        where: { user_id: userId },
+        orderBy: { end_date: 'desc' },
+        select: { tier: true }
+    }))?.tier || "Guest";
+}
