@@ -1,12 +1,9 @@
-.card {
+.linkButton {
     height: 170px;
     width: 300px;
-    background-color: var(--darkblue);
+    display: grid;
+    place-content: center;
     border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--darkblue);
     color: var(--white);
-    font-size: 14px;
-    font-weight: 500;
 }
