@@ -12,13 +12,13 @@ model book_copy {
   copy_id          String             @id @db.Char(10)
   book_id          String             @db.Char(6)
   status           String             @db.VarChar(10)
-  book_title       book_title         @relation(fields: [book_id], references: [book_id], onDelete: NoAction, onUpdate: NoAction)
+  book_title       book_title         @relation(fields: [book_id], references: [book_id], onDelete: NoAction)
   borrowing_detail borrowing_detail[]
 }
 
 model book_genre {
-  book_id    String     @db.Char(6)
   genre_id   String     @db.Char(3)
+  book_id    String     @db.Char(6)
   book_title book_title @relation(fields: [book_id], references: [book_id], onDelete: Cascade)
   genre      genre      @relation(fields: [genre_id], references: [genre_id], onDelete: Cascade)
 
@@ -26,7 +26,6 @@ model book_genre {
 }
 
 model book_title {
-  book_id    String       @id @db.Char(6)
   title      String       @db.VarChar(100)
   author     String       @db.VarChar(100)
   publisher  String?      @db.VarChar(100)
@@ -34,6 +33,7 @@ model book_title {
   language   String       @db.VarChar(20)
   page       Int?
   image_path String?
+  book_id    String       @id @db.Char(6)
   book_copy  book_copy[]
   book_genre book_genre[]
 }
@@ -78,6 +78,8 @@ model membership_tier {
   benefits            String
   discount_percentage Int
   monthly_fee         Float
+  borrow_count        Int
+  borrow_day          Int
   subscription        subscription[]
 }
 
