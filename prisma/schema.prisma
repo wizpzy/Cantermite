@@ -54,13 +54,13 @@ model borrowing_detail {
   borrow_id                               String    @id @db.Char(10)
   member_id                               String    @db.VarChar(36)
   book_copy_id                            String    @db.Char(10)
-  approved_by                             String    @db.VarChar(36)
+  approved_by                             String?   @db.VarChar(36)
   borrow_date                             DateTime  @db.Date
   due_date                                DateTime  @db.Date
   return_date                             DateTime? @db.Date
   status                                  String    @db.VarChar(10)
   pay_id                                  String?   @db.Char(10)
-  user_borrowing_detail_approved_byTouser user      @relation("borrowing_detail_approved_byTouser", fields: [approved_by], references: [user_id], onDelete: NoAction)
+  user_borrowing_detail_approved_byTouser user?     @relation("borrowing_detail_approved_byTouser", fields: [approved_by], references: [user_id], onDelete: NoAction)
   book_copy                               book_copy @relation(fields: [book_copy_id], references: [copy_id], onDelete: NoAction)
   user_borrowing_detail_member_idTouser   user      @relation("borrowing_detail_member_idTouser", fields: [member_id], references: [user_id], onDelete: NoAction)
   payment                                 payment?  @relation(fields: [pay_id], references: [pay_id], onDelete: NoAction)
