@@ -1,6 +1,6 @@
-import prisma from "@/lib/prisma";
+import { randomId } from "@/utils/randomId";
 import { NextResponse } from "next/server";
-import crypto from "crypto";
+import prisma from "@/lib/prisma";
 
 export async function GET(req) {
     const searchParams = req.nextUrl.searchParams;
@@ -40,7 +40,7 @@ export async function POST(req) {
     try {
         for (const book of body.data.books) {
             console.log("Creating book:", JSON.stringify(book, null, 2));
-            const newId = crypto.randomBytes(16).toString("base64").replace(/[^a-zA-Z0-9]/g, '').slice(0, 6);
+            const newId = randomId(6);
             const newBook = await prisma.book_title.create({
                 data: {
                     book_id: newId,
