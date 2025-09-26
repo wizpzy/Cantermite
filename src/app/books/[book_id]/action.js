@@ -1,7 +1,7 @@
 "use server";
 
 import { getAuthSession } from "@/lib/session";
-import { getUserById } from "@/lib/db";
+import { getAvailableCopy, getUserById } from "@/lib/db";
 import { randomId } from "@/utils/randomId";
 import { reformatDueDate } from "@/utils/date";
 import prisma from "@/lib/prisma";
@@ -12,12 +12,7 @@ export async function sendBorrowRequest(formData) {
     const borrowId = randomId(10);
     const bookId = formData.get("bookId");
     try {
-        const bookCopy = await prisma.book_copy.findFirst({
-            where: {
-                book_id: bookId,
-                status: "available",
-            },
-        });
+        const bookCopy = await getAvailableCopy(bookId);
         const borrowDate = formData.get("borrowDate");
         const dueDate = reformatDueDate(formData.get("dueDate"));
         await prisma.borrowing_detail.create({

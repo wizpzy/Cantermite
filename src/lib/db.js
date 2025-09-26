@@ -20,3 +20,12 @@ export async function getUserCurrentTier(userId) {
         select: { tier: true }
     }))?.tier || "Guest";
 }
+
+export async function getAvailableCopy(bookId) {
+    return await prisma.book_copy.findFirst({
+            where: {
+                book_id: bookId,
+                status: "available",
+            },
+        });
+}

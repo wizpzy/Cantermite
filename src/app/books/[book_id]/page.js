@@ -1,6 +1,6 @@
 import { getAuthSession } from "@/lib/session";
-import { getUserById, getBookById } from "@/lib/db";
-import { PackagePlus } from "lucide-react";
+import { getUserById, getBookById, getAvailableCopy } from "@/lib/db";
+import { PackagePlus, SquarePen } from "lucide-react";
 import BorrowDateInput from "./borrowDateInput";
 import BreadCrumb from "@/components/breadCrumb";
 import Image from "next/image";
@@ -15,6 +15,7 @@ export default async function BorrowingPage({ params }) {
     const session = await getAuthSession();
     const userData = session?.userId ? await getUserById(session.userId, { address: true }) : null;
     const imageUrl = book.image_path ? `https://covers.openlibrary.org/b/id/${book.image_path}-L.jpg` : '/noImage.png';
+    const isAvailable = (await getAvailableCopy(book_id)) ? true : false;
 
     return (
         <div className={styles.page}>
@@ -65,6 +66,9 @@ export default async function BorrowingPage({ params }) {
                             <BorrowDateInput />
                         </div>
                         <div className={styles.bookSection}>
+                            <a href="" className={styles.edit}> {/* WIP */}
+                                <SquarePen color="var(--darkgrey1)" />
+                            </a> 
                             <div className={styles.addressContainer}>
                                 <span className={styles.sectionTitle}>ที่อยู่ที่บันทึกไว้</span>
                                 <p className={styles.value}>{userData ? userData?.address || "คุณยังไม่มีที่อยู่ที่บันทึกไว้ กรุณาเพิ่มที่อยู่ในหน้าข้อมูลส่วนตัว" : "-"}</p>
@@ -74,9 +78,9 @@ export default async function BorrowingPage({ params }) {
                 </div>
                 <input type="hidden" name="bookId" value={book_id} />
                 <div className={styles.buttonContainer}>
-                    <SubmitButton className={styles.borrowButton} disabled={!session || !userData?.address} text={"อิอิ"}>
+                    <SubmitButton className={styles.borrowButton} disabled={!session || !userData?.address || !isAvailable} text={"อิอิ"}>
                         <PackagePlus size={20} />
-                        ยืมหนังสือ
+                        {isAvailable ? "ยืมหนังสือ" : "ไม่พร้อมให้บริการ"}
                     </SubmitButton>
                 </div>
             </form>
