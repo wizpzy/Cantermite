@@ -61,7 +61,7 @@ export default function HeaderClient({ isLogin, fName, lName, role }) {
             {isLogin ? (
                 <div className={styles.dropdown}>
                     <div className={styles.navLink}>
-                        <img src="avatar.png" alt="Profile" className={styles.profileIcon} />
+                        <img src="/avatar.png" alt="Profile" className={styles.profileIcon} />
                         <div className={styles.profileInfo}>
                             <span className={styles.name}>{fName} {lName}</span>
                             <span className={styles.role}>{role == "staff" ? "เจ้าหน้าที่" : "สมาชิก"}</span>
