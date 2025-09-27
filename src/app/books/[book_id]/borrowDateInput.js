@@ -10,7 +10,10 @@ export default function BorrowDateInput() {
     return (
         <div className={styles.labelValue}>
             <div className={styles.borrowDetailItem}>
-                <span className={styles.label}>วันที่ต้องการยืม</span>
+                <span className={styles.label}>
+                    วันที่ต้องการยืม
+                    <span className={styles.required}> *</span>
+                </span>
                 <input type="date" name="borrowDate" className={styles.dateInput} min={getToday()} onChange={(e) => setBorrowDate(e.target.value)} required />
             </div>
             <div className={styles.borrowDetailItem}>
