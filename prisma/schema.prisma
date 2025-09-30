@@ -114,6 +114,7 @@ model subscription {
   end_date        DateTime        @db.Date
   tier            String          @db.VarChar(10)
   pay_id          String?         @db.VarChar(10)
+  status          String          @db.VarChar(10)
   user            user            @relation(fields: [member_id], references: [user_id], onDelete: NoAction)
   payment         payment?        @relation(fields: [pay_id], references: [pay_id], onDelete: NoAction)
   membership_tier membership_tier @relation(fields: [tier], references: [tier], onDelete: NoAction)
