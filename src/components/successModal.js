@@ -8,7 +8,7 @@ export default function SuccessModal({ onClose, text }) {
                 <button className={styles.closeBtn} onClick={onClose} aria-label="Close">×</button>
                 <Image src={"/successIcon.png"} alt="Success icon" width={170} height={170} />
                 <span> {text} </span>
-                <a href="/"> กลับหน้าหลัก </a>
+                <a href="/" className={styles.back}> กลับหน้าหลัก </a>
             </div>
         </div>
     );

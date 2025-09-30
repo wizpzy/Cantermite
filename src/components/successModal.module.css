@@ -36,3 +36,11 @@
   cursor: pointer;
   line-height: 1;
 }
+
+.back {
+  color: var(--lightblue);
+}
+
+.back:hover {
+  text-decoration-line: underline;
+}
