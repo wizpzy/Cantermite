@@ -1,11 +1,10 @@
 import { getAuthSession } from "@/lib/session";
-import { getUserById, getBookById, getAvailableCopy } from "@/lib/db";
+import { getUserById, getBookById, getAvailableCopy, getTier, getUserCurrentTier } from "@/lib/db";
 import { PackagePlus, SquarePen } from "lucide-react";
 import BorrowDateInput from "./borrowDateInput";
 import BreadCrumb from "@/components/breadCrumb";
 import Image from "next/image";
 import styles from "./page.module.css";
-import Button from "@/components/button";
 import SubmitButton from "@/components/submitButton";
 import { sendBorrowRequest } from "./action";
 
@@ -14,6 +13,8 @@ export default async function BorrowingPage({ params }) {
     const book = await getBookById(book_id);
     const session = await getAuthSession();
     const userData = session?.userId ? await getUserById(session.userId, { address: true }) : null;
+    const tier = await getUserCurrentTier(session?.userId);
+    const tierData = await getTier(tier);
     const imageUrl = book.image_path ? `https://covers.openlibrary.org/b/id/${book.image_path}-L.jpg` : '/noImage.png';
     const isAvailable = (await getAvailableCopy(book_id)) ? true : false;
 
@@ -63,7 +64,7 @@ export default async function BorrowingPage({ params }) {
                         </div>
                         <div className={styles.bookSection}>
                             <h3 className={styles.sectionTitle}>รายละเอียดการยืม</h3>
-                            <BorrowDateInput />
+                            <BorrowDateInput tierData={tierData} />
                         </div>
                         <div className={styles.bookSection}>
                             <a href="" className={styles.edit}> {/* WIP */}
@@ -78,7 +79,7 @@ export default async function BorrowingPage({ params }) {
                 </div>
                 <input type="hidden" name="bookId" value={book_id} />
                 <div className={styles.buttonContainer}>
-                    <SubmitButton className={styles.borrowButton} disabled={!session || !userData?.address || !isAvailable} text={"อิอิ"}>
+                    <SubmitButton className={styles.borrowButton} disabled={!session || !userData?.address || !isAvailable} text={"ยืมหนังสือสำเร็จแล้ว"}>
                         <PackagePlus size={20} />
                         {isAvailable ? "ยืมหนังสือ" : "ไม่พร้อมให้บริการ"}
                     </SubmitButton>

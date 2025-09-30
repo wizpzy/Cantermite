@@ -6,9 +6,9 @@ export function getToday() {
   return `${year}-${month}-${day}`;
 }
 
-export function getDueDate(borrowDate) {
+export function getDueDate(borrowDate, period) {
     const dueDate = new Date(borrowDate);
-    dueDate.setDate(dueDate.getDate() + 14);
+    dueDate.setDate(dueDate.getDate() + period);
     const year = dueDate.getFullYear();
     const month = String(dueDate.getMonth() + 1).padStart(2, "0");
     const day = String(dueDate.getDate()).padStart(2, "0");

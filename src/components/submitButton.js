@@ -1,36 +1,32 @@
 "use client";
 
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "./button";
 import SuccessModal from "./successModal";
 
-export default function SubmitButton({ type = "button", className, children, onClick, disabled = false, text }) {
+export default function SubmitButton({ className, children, onClick, disabled = false, text }) {
     const [showModal, setShowModal] = useState(false);
-    const [formEl, setFormEl] = useState(null)
+    const router = useRouter();
 
-    const handleClick = (e) => {
-        const form = e.currentTarget.closest("form");
-        if(!form) return;
-        if (!form.reportValidity()) return;
-        setFormEl(form);
-        formEl?.requestSubmit();
-        setShowModal(true);
-    };
-
+    const onClose = () => {
+        setShowModal(false)
+        router.refresh();
+    }
 
     return (
         <>
             <Button
-                type={type}
+                type="submit"
                 className={className}
-                onClick={handleClick}
+                onClick={() => {setShowModal(true)}}
                 disabled={disabled}
             >
                 {children}
             </Button>
             {showModal && createPortal(
-                <SuccessModal onClose={() => setShowModal(false)} text={text} />
+                <SuccessModal onClose={onClose} text={text} />
                 , document.body
             )}
         </>
