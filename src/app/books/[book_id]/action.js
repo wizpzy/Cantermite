@@ -35,7 +35,6 @@ export async function sendBorrowRequest(formData) {
                 copy_id: bookCopy.copy_id
             }
         })
-        console.log("Borrow request sent:");
     } catch (error) {
         console.log(error)
     }
