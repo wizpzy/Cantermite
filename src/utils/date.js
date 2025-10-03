@@ -1,3 +1,20 @@
+export function formatDateFromDB(date) {
+    if (!date) {
+        return "-";
+    }
+    
+    const jsDate = date instanceof Date ? date : new Date(date);
+    if (Number.isNaN(jsDate.getTime())) {
+        return "-";
+    }
+
+    const day = String(jsDate.getDate()).padStart(2, "0");
+    const month = String(jsDate.getMonth() + 1).padStart(2, "0");
+    const year = jsDate.getFullYear();
+
+    return `${day}/${month}/${year}`;
+}
+
 export function getToday() {
   const today = new Date();
   const year = today.getFullYear();
