@@ -6,7 +6,7 @@ export default function Button({ children, onClick, type = "button", disabled = 
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={styles.button}
+            className={className ? styles[className] : styles.button}
         >
             {children}
         </button>

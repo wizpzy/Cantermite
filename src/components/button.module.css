@@ -16,7 +16,20 @@
   color: var(--white);
   border: 0;
   cursor: default;
+}
 
-  /* background-color: var(--lightgrey2);
-  cursor: not-allowed; */
+.iconButton {
+  color: var(--darkblue);
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  align-content: center;
+}
+
+.iconButton:disabled {
+  color: var(--darkgrey1);
+  border: 0;
+  cursor: default;
+  display: flex;
+  align-content: center;
 }
