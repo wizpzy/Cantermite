@@ -1,3 +1,103 @@
 .page {
+    /* height: calc(90vh - 80px); */
+    display: flex;
+    flex-direction: column;
     margin: 40px;
+    padding: 40px;
+    border-radius: 25px;
+    border: 2px solid var(--lightgrey1);
+}
+
+.heading {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.heading h2 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.historyContainer {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px solid var(--lightgrey1);
+}
+
+.historyContainer table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+}
+
+.historyContainer thead {
+    height: 10%;
+}
+
+.historyContainer thead th {
+    font-weight: 500;
+}
+
+.historyContainer tbody tr {
+    height: 9%;
+}
+
+.bookTitle {
+    text-align: left;
+    text-indent: 5%;
+}
+
+.status {
+    justify-self: center;
+    width: 180px;
+    border-radius: 20px;
+    padding: 6px 30px;
+}
+
+.pending {
+    background-color: var(--lightpurple);
+    color: var(--purple);
+}
+
+.borrowed {
+    background-color: var(--lightyellow);
+    color: var(--yellow);
+}
+
+.returned {
+    background-color: var(--lightgreen);
+    color: var(--green);
+}
+
+.overdue {
+    background-color: var(--lightred);
+    color: var(--red);
+}
+
+.pagination {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.pageNumber {
+    width: 50px;
+    height: 100%;
+    border: 1px solid var(--lightgrey1);
+    border-radius: 20px;
+    text-align: center;
+    font-family: var(--font-kanit), sans-serif;
+    font-size: 14px;
+}
+
+.maxPageNumber {
+    color: var(--darkgrey1);
 }
