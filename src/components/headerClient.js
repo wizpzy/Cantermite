@@ -48,8 +48,8 @@ export default function HeaderClient({ isLogin, fName, lName, role }) {
                         <ChevronDown color="var(--white)" size={16} strokeWidth={2} />
                     </div>
                     <div className={styles.dropdownMenu}>
-                        <Link href="/" className={styles.dropdownItem}>จองพื้นที่ทำงาน</Link>
-                        <Link href="/" className={styles.dropdownItem}>ประวัติการจอง</Link>
+                        <Link href="/spaces" className={styles.dropdownItem}>จองพื้นที่ทำงาน</Link>
+                        <Link href="/booking" className={styles.dropdownItem}>ประวัติการจอง</Link>
                     </div>
                 </div>
             </nav>
