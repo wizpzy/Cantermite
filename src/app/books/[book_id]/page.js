@@ -1,12 +1,8 @@
 import { getAuthSession } from "@/lib/session";
 import { getUserById, getBookById, getAvailableCopy, getTier, getUserCurrentTier } from "@/lib/db";
-import { PackagePlus, SquarePen } from "lucide-react";
-import BorrowDateInput from "./borrowDateInput";
 import BreadCrumb from "@/components/breadCrumb";
-import Image from "next/image";
 import styles from "./page.module.css";
-import SubmitButton from "@/components/submitButton";
-import { sendBorrowRequest } from "./action";
+import BorrowForm from "./borrowForm";
 
 export default async function BorrowingPage({ params }) {
     const { book_id } = await params;
@@ -15,8 +11,7 @@ export default async function BorrowingPage({ params }) {
     const userData = session?.userId ? await getUserById(session.userId, { address: true }) : null;
     const tier = await getUserCurrentTier(session?.userId);
     const tierData = await getTier(tier);
-    const imageUrl = book.image_path ? `https://covers.openlibrary.org/b/id/${book.image_path}-L.jpg` : '/noImage.png';
-    const isAvailable = (await getAvailableCopy(book_id)) ? true : false;
+    book.isAvailable = (await getAvailableCopy(book_id)) ? true : false;
 
     return (
         <div className={styles.page}>
@@ -24,67 +19,7 @@ export default async function BorrowingPage({ params }) {
                 { href: "/books", label: "ยืมหนังสือ" },
                 { label: book.title }
             ]} />
-            <form className={styles.detailLayout} action={sendBorrowRequest}>
-                <div className={styles.detailContainer}>
-                    <div className={styles.image}>
-                        <Image src={imageUrl} alt={`${book.title} cover / ${book.image_path}`} width={400} height={640} />
-                    </div>
-
-                    <div className={styles.bookInfo}>
-                        <div className={styles.bookSection}>
-                            <h2 className={styles.sectionTitle}>รายละเอียดหนังสือ</h2>
-                            <div className={styles.labelValue}>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ชื่อหนังสือ</span>
-                                    <span className={styles.value}>{book.title}</span>
-                                </div>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ชื่อผู้เขียน</span>
-                                    <span className={styles.value}>{book.author}</span>
-                                </div>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ชื่อสำนักพิมพ์</span>
-                                    <span className={styles.value}>{book.publisher ? book.publisher : "-"}</span>
-                                </div>
-                            </div>
-                            <div className={styles.labelValue}>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ปีที่พิมพ์</span>
-                                    <span className={styles.value}>{book.year}</span>
-                                </div>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ภาษา</span>
-                                    <span className={styles.value}>{book.language ? book.language : "-"}</span>
-                                </div>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>หมวดหมู่</span>
-                                    <span className={styles.value}>{book.category ? book.category : "-"}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles.bookSection}>
-                            <h3 className={styles.sectionTitle}>รายละเอียดการยืม</h3>
-                            <BorrowDateInput tierData={tierData} />
-                        </div>
-                        <div className={styles.bookSection}>
-                            <a href="" className={styles.edit}> {/* WIP */}
-                                <SquarePen color="var(--darkgrey1)" />
-                            </a> 
-                            <div className={styles.addressContainer}>
-                                <span className={styles.sectionTitle}>ที่อยู่ที่บันทึกไว้</span>
-                                <p className={styles.value}>{userData ? userData?.address || "คุณยังไม่มีที่อยู่ที่บันทึกไว้ กรุณาเพิ่มที่อยู่ในหน้าข้อมูลส่วนตัว" : "-"}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <input type="hidden" name="bookId" value={book_id} />
-                <div className={styles.buttonContainer}>
-                    <SubmitButton className={styles.borrowButton} disabled={!session || !userData?.address || !isAvailable} text={"ยืมหนังสือสำเร็จแล้ว"}>
-                        <PackagePlus size={20} />
-                        {isAvailable ? "ยืมหนังสือ" : "ไม่พร้อมให้บริการ"}
-                    </SubmitButton>
-                </div>
-            </form>
+            <BorrowForm bookData={book} userData={userData} tierData={tierData} />
         </div>
     );
 }

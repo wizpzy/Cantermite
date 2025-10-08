@@ -6,7 +6,7 @@ import { randomId } from "@/utils/randomId";
 import { reformatDueDate } from "@/utils/date";
 import prisma from "@/lib/prisma";
 
-export async function sendBorrowRequest(formData) {
+export async function sendBorrowRequest(prevstate, formData) {
     const session = await getAuthSession();
     const userData = session?.userId ? await getUserById(session.userId, { user_id: true }) : null;
     const borrowId = randomId(10);
@@ -23,8 +23,6 @@ export async function sendBorrowRequest(formData) {
                 borrow_date: new Date(borrowDate),
                 due_date: new Date(dueDate),
                 status: "pending",
-                // book_copy_id: bookCopy.copy_id,
-                // user_borrowing_detail_member_idTouser: userData,
             }
         });
         await prisma.book_copy.update({
@@ -34,9 +32,11 @@ export async function sendBorrowRequest(formData) {
             where: {
                 copy_id: bookCopy.copy_id
             }
-        })
+        });
+        return { success: true };
     } catch (error) {
         console.log(error)
+        return { success: false, error };
     }
 
     // console.log(formData);
