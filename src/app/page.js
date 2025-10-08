@@ -1,21 +1,12 @@
-import axios from "axios";
+import { getAllGenres, getPopularBooks } from "@/lib/db";
 import BookList from "@/components/bookList";
 import GenreList from "@/components/genreList";
 import Section from "@/components/section";
 import styles from "./page.module.css";
 
-const getBooks = async () => {
-  const response = await axios.get("http://localhost:3000/api/books?sort=popular");
-  return response.data.slice(0, 5);
-}
-
-const getGenres = async () => {
-  const response = await axios.get("http://localhost:3000/api/genres");
-  return response.data.slice(0, 5);
-}
-
 export default async function Home() {
-  const [books, genres] = await Promise.all([getBooks(), getGenres()]);
+  const books = await getPopularBooks(5);
+  const genres = await getAllGenres(5);
 
   return (
     <div className={styles.page}>

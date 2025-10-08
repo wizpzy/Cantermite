@@ -29,9 +29,23 @@ export async function getTier(tier) {
 // BOOK
 
 export async function getBookById(bookId) {
-    return await prisma.book_title.findUnique({
-        where: { book_id: bookId }
+    const bookData = await prisma.book_title.findUnique({
+        where: { book_id: bookId },
+        include: {
+            book_genre: {
+                select: {
+                    genre: {
+                        select: {
+                            genre_name: true
+                        }
+                    }
+                }
+            }
+        }
     });
+    bookData.genre_name = bookData.book_genre[0].genre.genre_name;
+    delete bookData.book_genre;
+    return bookData;
 }
 
 export async function getAvailableCopy(bookId) {
@@ -41,4 +55,27 @@ export async function getAvailableCopy(bookId) {
                 status: "available",
             },
         });
+}
+
+export async function getPopularBooks(limit) {
+    return await prisma.$queryRaw
+            `
+            SELECT bt.*, COALESCE(COUNT(bd.borrow_id), 0)::int AS borrow_count
+            FROM book_title bt
+            LEFT JOIN book_copy bc
+                ON bc.book_id = bt.book_id
+            LEFT JOIN borrowing_detail bd
+                ON bd.book_copy_id = bc.copy_id
+                AND bd.status = 'returned'
+            GROUP BY bt.book_id, bt.title, bt.author
+            ORDER BY borrow_count DESC, bt.title ASC
+            LIMIT ${limit};
+            `;
+}
+
+export async function getAllGenres(limit) {
+    return await prisma.genre.findMany({
+        orderBy: { genre_name: 'asc' },
+        take: limit
+    });
 }
