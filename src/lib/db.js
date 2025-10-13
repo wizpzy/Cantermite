@@ -79,3 +79,35 @@ export async function getAllGenres(limit) {
         take: limit
     });
 }
+
+// SPACE
+
+export async function getSmallSpace() {
+    return await prisma.working_space.findMany({
+        include: {
+            space_type: true
+        },
+        where: {
+            space_type: {
+                capacity: {
+                    lt: 4
+                }
+            }
+        }
+    });
+}
+
+export async function getLargeSpace() {
+    return await prisma.working_space.findMany({
+        include: {
+            space_type: true
+        },
+        where: {
+            space_type: {
+                capacity: {
+                    gte: 4
+                }
+            }
+        }
+    });
+}

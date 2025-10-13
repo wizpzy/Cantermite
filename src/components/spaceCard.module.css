@@ -1,0 +1,44 @@
+.cardContainer {
+    width: 300px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 160px);
+    padding: 20px;
+    font-size: 14px;
+}
+.name {
+    color: var(--darkblue);
+    font-weight: 500;
+    overflow: hidden;
+    min-height: calc(1.5em);
+}
+
+.specContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.spec {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.linkButton {
+    text-align: center;
+    font-family: var(--font-kanit), sans-serif;
+    padding: 12px 12px;
+    border-radius: 20px;
+    background: var(--darkblue);
+    color: var(--white);
+}
