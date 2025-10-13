@@ -70,6 +70,7 @@ model genre {
   genre_id    String       @id @db.Char(3)
   genre_name  String       @db.VarChar(20)
   description String
+  image_path  String?      @db.VarChar(30)
   book_genre  book_genre[]
 }
 
