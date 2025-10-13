@@ -1,6 +1,6 @@
 import { getAllGenres, getPopularBooks } from "@/lib/db";
-import BookList from "@/components/bookList";
-import GenreList from "@/components/genreList";
+import BookCard from "@/components/bookCard";
+import GenreCard from "@/components/genreCard";
 import Section from "@/components/section";
 import styles from "./page.module.css";
 
@@ -10,8 +10,21 @@ export default async function Home() {
 
   return (
     <div className={styles.page}>
-      <Section title="หนังสือแนะนำ" seeAllHref="/books" children={<BookList books={books} />} />
-      <Section title="หมวดหมู่" seeAllHref="/genres" children={<GenreList genres={genres} />} />
+      <Section title="หนังสือแนะนำ" seeAllHref="/books">
+        <div className={styles.list}>
+          {books.map((book) => (
+            <BookCard key={book.book_id} bookId={book.book_id} {...book} imagePath={book.image_path} />
+          ))}
+        </div>
+      </Section>
+
+      <Section title="หมวดหมู่" seeAllHref="/genres">
+        <div className={styles.list}>
+          {genres.map((genre) => (
+            <GenreCard key={genre.genre_id} {...genre} />
+          ))}
+        </div>
+      </Section>
     </div>
   );
 }

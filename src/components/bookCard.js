@@ -8,7 +8,7 @@ export default function BookCard({ bookId, title, author, year, language, imageP
     const imageUrl = imagePath ? `https://covers.openlibrary.org/b/id/${imagePath}-M.jpg` : '/noImage.png';
     return (
         <div className={styles.cardContainer}>
-            <Image src={imageUrl} alt={`${title} cover / ${imagePath}`} className={styles.coverImage} width={300} height={280} />
+            <Image src={imageUrl} alt={`${title} cover`} className={styles.coverImage} width={300} height={280} />
             <div className={styles.bookInfo}>
                 <div className={styles.title}>{title}</div>
                 <span className={styles.author}>
