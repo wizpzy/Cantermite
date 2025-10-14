@@ -82,6 +82,17 @@ export async function getAllGenres(limit) {
 
 // SPACE
 
+export async function getSpaceById(spaceId) {
+    return await prisma.working_space.findUnique({
+        where: {
+            space_id: spaceId
+        },
+        include: {
+            space_type: true
+        }
+    });
+}
+
 export async function getSmallSpace() {
     return await prisma.working_space.findMany({
         include: {

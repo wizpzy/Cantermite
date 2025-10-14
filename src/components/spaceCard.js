@@ -5,7 +5,6 @@ import styles from './spaceCard.module.css';
 
 export default function SpaceCard({space}) {
     const imageUrl = space.space_type.image_path ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${space.space_type.image_path}` : '/noImage.png';
-
     return (
         <div className={styles.cardContainer}>
             <Image src={imageUrl} alt={`${space.space_name} image`} width={300} height={160} />
@@ -21,7 +20,7 @@ export default function SpaceCard({space}) {
                         {space.space_type.price} บาท/ชั่วโมง
                     </span>
                 </div>
-                <Link href={"/"} className={styles.linkButton}>ดูรายละเอียด</Link>
+                <Link href={`/spaces/${space.space_id}`} className={styles.linkButton}>ดูรายละเอียด</Link>
             </div>
         </div>
     )
