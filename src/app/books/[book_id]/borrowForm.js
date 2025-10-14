@@ -25,7 +25,7 @@ export default function BorrowForm({ bookData, userData, tierData }) {
             <form className={styles.detailLayout} action={formAction}>
                 <div className={styles.detailContainer}>
                     <div className={styles.image}>
-                        <Image src={imageUrl} alt={`${bookData.title} cover / ${bookData.image_path}`} width={400} height={640} />
+                        <Image src={imageUrl} alt={`${bookData.title} cover / ${bookData.image_path}`} width={400} height={640} priority />
                     </div>
 
                     <div className={styles.bookInfo}>
