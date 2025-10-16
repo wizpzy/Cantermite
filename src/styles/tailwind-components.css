@@ -1,0 +1,5 @@
+@layer components {
+  .linkButton {
+    @apply rounded-[20px] bg-(--darkblue) p-3 text-center text-(--white);
+  }
+}
