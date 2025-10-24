@@ -26,6 +26,14 @@ export async function getTier(tier) {
     }));
 }
 
+export async function getAllTiers() {
+    return (await prisma.membership_tier.findMany({
+        orderBy: {
+            monthly_fee: 'asc'
+        }
+    }));
+}
+
 // BOOK
 
 export async function getBookById(bookId) {
