@@ -1,5 +1,9 @@
+
+
 export default async function AllBooksPage () {
     return (
-        <h1>AllBooksPage</h1>
+        <div className="m-10">
+            <h2>All Books Page</h2>
+        </div>
     );
 }

@@ -7,7 +7,6 @@ import { useActionState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/button";
 import Image from "next/image";
-import styles from "./page.module.css";
 import SuccessModal from "@/components/successModal";
 
 export default function BorrowForm({ bookData, userData, tierData }) {
@@ -22,86 +21,86 @@ export default function BorrowForm({ bookData, userData, tierData }) {
 
     return (
         <>
-            <form className={styles.detailLayout} action={formAction}>
-                <div className={styles.detailContainer}>
-                    <div className={styles.image}>
-                        <Image src={imageUrl} alt={`${bookData.title} cover / ${bookData.image_path}`} width={400} height={640} priority />
+            <form className="w-full flex flex-col gap-10 bg-[white] shadow-[0_0_45.4px_rgba(0,0,0,0.2)] p-10 rounded-[25px]" action={formAction}>
+                <div className="flex gap-10">
+                    <div className="overflow-hidden w-[400px] h-[640px] rounded-[20px] relative">
+                        <Image src={imageUrl} alt={`${bookData.title} cover / ${bookData.image_path}`} fill priority />
                     </div>
 
-                    <div className={styles.bookInfo}>
-                        <div className={styles.bookSection}>
-                            <h2 className={styles.sectionTitle}>รายละเอียดหนังสือ</h2>
-                            <div className={styles.labelValue}>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ชื่อหนังสือ</span>
-                                    <span className={styles.value}>{bookData.title}</span>
+                    <div className="w-[calc(100%_-_440px)] flex flex-col gap-10">
+                        <div className="relative w-full border-(--lightgrey1) flex flex-col gap-[30px] p-[30px] rounded-[20px] border-2 border-solid">
+                            <h2 className="text-base text-(--black) font-medium">รายละเอียดหนังสือ</h2>
+                            <div className="flex justify-between w-[calc(100%_-_180px)]">
+                                <div className="w-[15%] flex flex-col gap-2 text-sm">
+                                    <span className="font-medium text-(--black)">ชื่อหนังสือ</span>
+                                    <span className="text-(--darkblue)">{bookData.title}</span>
                                 </div>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ชื่อผู้เขียน</span>
-                                    <span className={styles.value}>{bookData.author}</span>
+                                <div className="w-[15%] flex flex-col gap-2 text-sm">
+                                    <span className="font-medium text-(--black)">ชื่อผู้เขียน</span>
+                                    <span className="text-(--darkblue)">{bookData.author}</span>
                                 </div>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ชื่อสำนักพิมพ์</span>
-                                    <span className={styles.value}>{bookData.publisher ? bookData.publisher : "-"}</span>
+                                <div className="w-[15%] flex flex-col gap-2 text-sm">
+                                    <span className="font-medium text-(--black)">ชื่อสำนักพิมพ์</span>
+                                    <span className="text-(--darkblue)">{bookData.publisher ? bookData.publisher : "-"}</span>
                                 </div>
                             </div>
-                            <div className={styles.labelValue}>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ปีที่พิมพ์</span>
-                                    <span className={styles.value}>{bookData.year}</span>
+                            <div className="flex justify-between w-[calc(100%_-_180px)]">
+                                <div className="w-[15%] flex flex-col gap-2 text-sm">
+                                    <span className="font-medium text-(--black)">ปีที่พิมพ์</span>
+                                    <span className="text-(--darkblue)">{bookData.year}</span>
                                 </div>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>ภาษา</span>
-                                    <span className={styles.value}>{bookData.language ? bookData.language : "-"}</span>
+                                <div className="w-[15%] flex flex-col gap-2 text-sm">
+                                    <span className="font-medium text-(--black)">ภาษา</span>
+                                    <span className="text-(--darkblue)">{bookData.language ? bookData.language : "-"}</span>
                                 </div>
-                                <div className={styles.metaItem}>
-                                    <span className={styles.label}>หมวดหมู่</span>
-                                    <span className={styles.value}>{bookData.genre_name ? bookData.genre_name : "-"}</span>
+                                <div className="w-[15%] flex flex-col gap-2 text-sm">
+                                    <span className="font-medium text-(--black)">หมวดหมู่</span>
+                                    <span className="text-(--darkblue)">{bookData.genre_name ? bookData.genre_name : "-"}</span>
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.bookSection}>
-                            <h3 className={styles.sectionTitle}>รายละเอียดการยืม</h3>
-                            <div className={styles.labelValue}>
-                                <div className={styles.borrowDetailItem}>
-                                    <span className={styles.label}>
+                        <div className="relative w-full border-(--lightgrey1) flex flex-col gap-[30px] p-[30px] rounded-[20px] border-2 border-solid">
+                            <h3 className="text-base text-(--black) font-medium">รายละเอียดการยืม</h3>
+                            <div className="flex justify-between w-[calc(100%_-_180px)]">
+                                <div className="w-[45%] flex flex-col gap-2">
+                                    <span className="text-sm font-medium text-(--black)">
                                         วันที่ต้องการยืม
-                                        <span className={styles.required}> *</span>
+                                        <span className="text-(--cancel)"> *</span>
                                     </span>
                                     <input
                                         type="date"
                                         name="borrowDate"
-                                        className={styles.dateInput}
+                                        className="border-(--lightgrey1) text-sm text-(--darkblue) px-5 py-3 rounded-[20px] border-2 border-solid"
                                         min={getToday()}
                                         onChange={(e) => { setDueDate(e) }}
                                         required
                                     />
                                 </div>
-                                <div className={styles.borrowDetailItem}>
-                                    <span className={styles.label}>วันที่ต้องคืนหนังสือ</span>
+                                <div className="w-[45%] flex flex-col gap-2">
+                                    <span className="text-sm font-medium text-(--black)">วันที่ต้องคืนหนังสือ</span>
                                     <input
                                         type="text"
                                         name="dueDate"
-                                        className={styles.dueDate}
+                                        className="w-fit text-sm font-medium text-(--black) cursor-default mt-3 border-0 focus: outline-none"
                                         placeholder="-- / -- / ----"
                                         readOnly
                                     />
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.bookSection}>
-                            <a href="" className={styles.edit}> {/* WIP */}
+                        <div className="relative w-full border-(--lightgrey1) flex flex-col gap-[30px] p-[30px] rounded-[20px] border-2 border-solid">
+                            <a href="" className="z-[2] absolute right-10 top-[30px]"> {/* WIP */}
                                 <SquarePen color="var(--darkgrey1)" />
                             </a>
-                            <div className={styles.addressContainer}>
-                                <span className={styles.sectionTitle}>ที่อยู่ที่บันทึกไว้</span>
-                                <p className={styles.value}>{userData ? userData?.address || "ไม่มีที่อยู่ที่บันทึกไว้ กรุณาเพิ่มที่อยู่ในหน้าข้อมูลส่วนตัว" : "-"}</p>
+                            <div className="flex flex-col gap-2">
+                                <span className="text-base text-(--black) font-medium">ที่อยู่ที่บันทึกไว้</span>
+                                <p className="text-sm text-(--darkblue)">{userData ? userData?.address || "ไม่มีที่อยู่ที่บันทึกไว้ กรุณาเพิ่มที่อยู่ในหน้าข้อมูลส่วนตัว" : "-"}</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <input type="hidden" name="bookId" value={bookData.book_id} />
-                <div className={styles.buttonContainer}>
+                <div className="flex justify-center">
                     <Button type="submit" disabled={!userData || !userData?.address || !bookData.isAvailable || isPending}>
                         <PackagePlus size={20} />
                         {isPending ? "กำลังส่งคำขอ..." : bookData.isAvailable ? "ยืมหนังสือ" : "ไม่พร้อมให้บริการ"}

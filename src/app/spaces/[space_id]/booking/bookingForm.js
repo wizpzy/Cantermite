@@ -1,11 +1,10 @@
 "use client";
 
-import { setHours, setMinutes, add, format, differenceInHours, differenceInMinutes } from "date-fns";
+import { setHours, setMinutes, add, format, differenceInMinutes } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CalendarClock, Tags, UsersRound } from "lucide-react";
 import { useState } from "react";
-import Button from "@/components/button";
 
 export default function BookingForm({ spaceData, userData, tierData }) {
     const [payMethod, setPayMethod] = useState(null);
@@ -23,7 +22,7 @@ export default function BookingForm({ spaceData, userData, tierData }) {
     ];
 
     return (
-        <div className="flex flex-col gap-[30px] rounded-[25px] bg-[white] p-[30px] shadow-[0_0_45.4px_rgba(0,0,0,0.2)]">
+        <div className="floatLayout">
             <div className="flex gap-[30px]">
                 <div className="flex w-[65%] flex-col gap-[30px]">
                     <div className="rounded-[20px] border-2 border-solid border-(--lightgrey1) p-[30px]">
@@ -33,13 +32,16 @@ export default function BookingForm({ spaceData, userData, tierData }) {
                                 <label htmlFor="start">วันและเวลาเริ่มต้น</label>
                                 <DatePicker
                                     selected={start}
-                                    onChange={(dateTime) => setStart(dateTime)}
+                                    onChange={(dateTime) => {
+                                        setStart(dateTime);
+                                        setEnd(null);
+                                    }}
                                     showTimeSelect
                                     timeIntervals={30}
                                     dateFormat="dd/MM/yyyy HH:mm น."
                                     timeFormat="HH:mm น."
                                     placeholderText="เลือกวันและเวลา"
-                                    className="w-full h-12 rounded-[20px] border-2 border-(--lightgrey1) px-3"
+                                    className="h-12 w-full rounded-[20px] border-2 border-(--lightgrey1) px-3"
                                     calendarClassName="z-50"
                                     popperClassName="z-50"
                                     minTime={setHours(setMinutes(new Date(), 0), 10)}
@@ -59,10 +61,14 @@ export default function BookingForm({ spaceData, userData, tierData }) {
                                     dateFormat="HH:mm น."
                                     timeFormat="HH:mm น."
                                     placeholderText="เลือกวันและเวลา"
-                                    className="w-full h-12 rounded-[20px] border-2 border-(--lightgrey1) px-3"
+                                    className="h-12 w-full rounded-[20px] border-2 border-(--lightgrey1) px-3"
                                     calendarClassName="z-50"
                                     popperClassName="z-50"
-                                    minTime={start ? add(start, { minutes: 29 }) : setHours(setMinutes(new Date(), 29), 10)}
+                                    minTime={
+                                        start
+                                            ? add(start, { minutes: 29 })
+                                            : setHours(setMinutes(new Date(), 29), 10)
+                                    }
                                     maxTime={setHours(setMinutes(new Date(), 0), 22)}
                                 />
                             </div>
@@ -71,9 +77,6 @@ export default function BookingForm({ spaceData, userData, tierData }) {
                     <div className="flex flex-col gap-10 rounded-[20px] border-2 border-solid border-(--lightgrey1) p-[30px]">
                         <h3 className="text-xl font-medium">เลือกวิธีการชำระเงิน</h3>
                         <div className="flex justify-around">
-                            {/* <button className="pb-7 text-center w-60 h-48 rounded-[20px] bg-(--darkblue) text-(--white)">Payment 1</button>
-                            <button className="pb-7 text-center w-60 h-48 rounded-[20px] bg-(--darkblue) text-(--white)">Payment 2</button>
-                            <button className="pb-7 text-center w-60 h-48 rounded-[20px] bg-(--darkblue) text-(--white)">Payment 3</button> */}
                             {payments.map((payment) => (
                                 <label key={payment.id}>
                                     <input
@@ -137,31 +140,55 @@ export default function BookingForm({ spaceData, userData, tierData }) {
                         <span className="font-medium text-(--black)">วันและเวลา</span>
                         <span className="flex items-center gap-2 whitespace-nowrap text-(--darkblue)">
                             <CalendarClock strokeWidth={2} />
-                            {(start && end) ? `${format(start, "dd/MM/yyyy HH:mm")} น. - ${format(end, "HH:mm")} น.` : "กรุณาเลือกวันและเวลาจอง"}
+                            {start && end
+                                ? `${format(start, "dd/MM/yyyy HH:mm")} น. - ${format(end, "HH:mm")} น.`
+                                : "กรุณาเลือกวันและเวลาจอง"}
                         </span>
                     </div>
                     <div className="flex flex-col gap-2">
                         <div className="flex justify-between">
-                            <span className="font-normal text-[16px]">ราคา</span>
-                            <span className="font-normal text-[16px] text-(--lightblue)"> {(start && end) ? getTotalPrice(start, end) : 0} บาท</span>
+                            <span className="text-[16px] font-normal">ราคา</span>
+                            <span className="text-[16px] font-normal text-(--lightblue)">
+                                {" "}
+                                {start && end ? getTotalPrice(start, end) : 0} บาท
+                            </span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="font-normal text-[16px]">ส่วนลดสมาชิก</span>
-                            <span className="font-normal text-[16px] text-(--lightblue)">- {tierData.discount_percentage} %</span>
+                            <span className="text-[16px] font-normal">ส่วนลดสมาชิก</span>
+                            <span className="text-[16px] font-normal text-(--lightblue)">
+                                - {tierData.discount_percentage} %
+                            </span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="font-medium text-[16px]">ทั้งหมด</span>
-                            <span className="font-medium text-[16px] text-(--lightblue)">
-                                {(start && end) ? getTotalPrice(start, end) * (1 - tierData.discount_percentage / 100) : 0} บาท
+                            <span className="text-[16px] font-medium">ทั้งหมด</span>
+                            <span className="text-[16px] font-medium text-(--lightblue)">
+                                {start && end
+                                    ? (
+                                        getTotalPrice(start, end) *
+                                        (1 - tierData.discount_percentage / 100)
+                                    ).toFixed(2)
+                                    : 0}{" "}
+                                บาท
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <Button>
-                <Tags strokeWidth={2} />
-                ชำระเงิน
-            </Button>
+            <div className="flex justify-center">
+                <button
+                    className="button w-52 disabled:w-fit"
+                    disabled={!start || !end || !payMethod}
+                >
+                    {!start || !end || !payMethod ? (
+                        "กรุณาเลือกเวลาและวิธีการชำระเงิน"
+                    ) : (
+                        <>
+                            <Tags strokeWidth={2} />
+                            ชำระเงิน
+                        </>
+                    )}
+                </button>
+            </div>
         </div>
     );
 }

@@ -1,5 +1,4 @@
 import BreadCrumb from "@/components/breadCrumb";
-import styles from "./page.module.css";
 import { getAuthSession } from "@/lib/session";
 import { getSpaceById, getUserById, getUserCurrentTier, getTier } from "@/lib/db";
 import BookingForm from "./bookingForm";
@@ -13,7 +12,7 @@ export default async function BookingPage({ params }) {
     const tierData = await getTier(tier);
     
     return (
-        <div className={styles.page}>
+        <div className="m-10">
             <BreadCrumb items={[
                             { href: "/spaces", label: "พื้นที่ทำงาน" },
                             { href: `/spaces/${space_id}`, label: `${space.space_id} - ${space.space_name}` },

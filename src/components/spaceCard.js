@@ -25,7 +25,7 @@ export default function SpaceCard({ space }) {
             {space.space_type.price} บาท/ชั่วโมง
           </span>
         </div>
-        <Link href={`/spaces/${space.space_id}`} className="linkButton">
+        <Link href={`/spaces/${space.space_id}`} className="button">
           ดูรายละเอียด
         </Link>
       </div>

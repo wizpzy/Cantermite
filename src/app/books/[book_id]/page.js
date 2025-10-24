@@ -1,7 +1,6 @@
 import { getAuthSession } from "@/lib/session";
 import { getUserById, getBookById, getAvailableCopy, getTier, getUserCurrentTier } from "@/lib/db";
 import BreadCrumb from "@/components/breadCrumb";
-import styles from "./page.module.css";
 import BorrowForm from "./borrowForm";
 
 export default async function BorrowingPage({ params }) {
@@ -14,7 +13,7 @@ export default async function BorrowingPage({ params }) {
     book.isAvailable = (await getAvailableCopy(book_id)) ? true : false;
 
     return (
-        <div className={styles.page}>
+        <div className="m-10">
             <BreadCrumb items={[
                 { href: "/books", label: "ยืมหนังสือ" },
                 { label: book.title }
