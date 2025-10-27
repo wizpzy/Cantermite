@@ -5,7 +5,6 @@ import { PackagePlus, SquarePen } from "lucide-react";
 import { sendBorrowRequest } from "./action";
 import { useActionState } from "react";
 import { useRouter } from "next/navigation";
-import Button from "@/components/button";
 import Image from "next/image";
 import SuccessModal from "@/components/successModal";
 
@@ -101,10 +100,10 @@ export default function BorrowForm({ bookData, userData, tierData }) {
                 </div>
                 <input type="hidden" name="bookId" value={bookData.book_id} />
                 <div className="flex justify-center">
-                    <Button type="submit" disabled={!userData || !userData?.address || !bookData.isAvailable || isPending}>
+                    <button type="submit" disabled={!userData || !userData?.address || !bookData.isAvailable || isPending}>
                         <PackagePlus size={20} />
                         {isPending ? "กำลังส่งคำขอ..." : bookData.isAvailable ? "ยืมหนังสือ" : "ไม่พร้อมให้บริการ"}
-                    </Button>
+                    </button>
                 </div>
             </form>
 
