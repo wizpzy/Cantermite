@@ -1,5 +1,4 @@
 import Image from "next/image";
-import styles from "./successModal.module.css";
 
 export default function SuccessModal({ onClose, text }) {
     return (
