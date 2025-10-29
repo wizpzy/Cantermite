@@ -1,5 +1,5 @@
 import { Kanit } from "next/font/google";
-import Header from "@/components/header";
+import Header from "@/components/header/header";
 import "./globals.css";
 
 const kanit = Kanit({
