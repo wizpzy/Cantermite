@@ -4,14 +4,14 @@ import {
   getAllTiers,
   getUserCurrentTier,
 } from "@/lib/db";
-import { getAuthSession } from "@/lib/session";
+import { verifySession } from "@/lib/dal";
 import BookCard from "@/components/bookCard";
 import GenreCard from "@/components/genreCard";
 import Section from "@/components/section";
 import TierCard from "@/components/tierCard";
 
 export default async function Home() {
-  const session = await getAuthSession();
+  const session = await verifySession();
   const currentTier = await getUserCurrentTier(session?.userId);
   const books = await getPopularBooks(5);
   const genres = await getAllGenres(5);
@@ -31,6 +31,7 @@ export default async function Home() {
               bookId={book.book_id}
               {...book}
               imagePath={book.image_path}
+              session={session}
             />
           ))}
         </div>
