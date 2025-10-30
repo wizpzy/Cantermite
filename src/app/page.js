@@ -31,7 +31,7 @@ export default async function Home() {
               bookId={book.book_id}
               {...book}
               imagePath={book.image_path}
-              session={session}
+              role={session.role}
             />
           ))}
         </div>

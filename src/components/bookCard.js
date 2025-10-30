@@ -2,7 +2,7 @@ import { CircleUserRound, SquarePen } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function BookCard({ bookId, title, author, year, language, imagePath, session }) {
+export default function BookCard({ bookId, title, author, year, language, imagePath, role }) {
     const imageUrl = imagePath ? `https://covers.openlibrary.org/b/id/${imagePath}-M.jpg` : '/noImage.png';
     return (
         <div className="overflow-hidden w-[300px] h-[460px] text-sm shadow-[0_2px_6px_rgba(0,0,0,0.2)] pb-5 rounded-[20px]">
@@ -17,7 +17,7 @@ export default function BookCard({ bookId, title, author, year, language, imageP
                     </span>
                     {author}
                 </span>
-                {session.role === "staff" ? 
+                {role === "staff" ? 
                 <Link href={`/staff/books/${bookId}`} className="button bg-(--black)">
                     <SquarePen size={20} />
                     แก้ไข
