@@ -13,7 +13,7 @@ export default async function Header() {
         <div className={`sticky top-0 z-[1] flex h-[10vh] w-full items-center px-20 py-2.5 text-sm text-(--white) gap-10 ${role === "staff" ? "bg-(--black)" : "bg-(--darkblue)"}`}>
             <HeaderLogo />
             <NavBar role={role} />
-            <Profile fName={name.f_name} lName={name.l_name} />
+            <Profile fName={name?.f_name} lName={name?.l_name} />
         </div>
     );
 }
