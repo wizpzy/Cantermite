@@ -11,6 +11,5 @@ const baseOptions = {
 export const verifySession = cache(async () => {
     const cookieStore = await cookies();
     const session = await getIronSession(cookieStore, baseOptions);
-    console.log("Session: ",session)
     return session;
 })
