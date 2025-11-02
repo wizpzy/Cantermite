@@ -2,7 +2,7 @@
 
 import { ChevronDown } from "lucide-react";
 import { createPortal } from "react-dom";
-import { logout } from "@/app/actions/logout";
+import { logout } from "@/lib/actions/logout";
 import { useState, useActionState } from "react";
 import Link from "next/link";
 import LoginModal from "../loginModal";

@@ -2,16 +2,14 @@
 
 import { getToday, getDueDate } from "@/utils/date";
 import { PackagePlus, SquarePen } from "lucide-react";
-import { sendBorrowRequest } from "./action";
+import { sendBorrowRequest } from "@/lib/actions/bookActions";
 import { useActionState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import SuccessModal from "@/components/successModal";
 
 export default function BorrowForm({ bookData, userData, tierData }) {
     const [state, formAction, isPending] = useActionState(sendBorrowRequest, { success: false });
     const imageUrl = bookData.image_path ? `https://covers.openlibrary.org/b/id/${bookData.image_path}-L.jpg` : '/noImage.png';
-    const router = useRouter();
     const setDueDate = (e) => {
         const form = e.currentTarget.closest("form");
         const borrowDate = e.target.value;
