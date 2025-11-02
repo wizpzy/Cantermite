@@ -43,6 +43,7 @@ export default function Profile({ fName, lName, role }) {
                         <button
                             type="submit"
                             className="w-full text-start block cursor-pointer px-5 py-2.5 text-(--black) no-underline hover:bg-(--lightblue) hover:text-(--white)"
+                            onClick={() => {window.history.replaceState(null, "", "/")}}
                         >
                             ออกจากระบบ
                         </button>
