@@ -36,6 +36,27 @@ export async function getAllTiers() {
 
 // BOOK
 
+export async function getAllBooks() {
+    const booksData = await prisma.book_title.findMany({
+        include: {
+            book_genre: {
+                select: {
+                    genre: {
+                        select: {
+                            genre_name: true
+                        }
+                    }
+                }
+            }
+        }
+    });
+    booksData.map(bookData => {
+        bookData.genre_name = bookData.book_genre[0].genre.genre_name;
+        delete bookData.book_genre;
+    })
+    return booksData;
+}
+
 export async function getBookById(bookId) {
     const bookData = await prisma.book_title.findUnique({
         where: { book_id: bookId },
