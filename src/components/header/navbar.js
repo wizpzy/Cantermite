@@ -13,7 +13,7 @@ export default function NavBar({ role }) {
                     </div>
                     <div className="absolute left-2/4 hidden w-full min-w-[180px] -translate-x-2/4 overflow-hidden rounded-[20px] bg-(--white) shadow-[0_2px_6px_rgba(0,0,0,0.2)] group-hover:block">
                         <Link
-                            href="/"
+                            href="/staff/books"
                             className="block cursor-pointer px-5 py-2.5 text-(--black) no-underline hover:bg-(--lightblue) hover:text-(--white)"
                         >
                             จัดการหนังสือ
@@ -23,6 +23,12 @@ export default function NavBar({ role }) {
                             className="block cursor-pointer px-5 py-2.5 text-(--black) no-underline hover:bg-(--lightblue) hover:text-(--white)"
                         >
                             จัดการหมวดหมู่หนังสือ
+                        </Link>
+                        <Link
+                            href="/"
+                            className="block cursor-pointer px-5 py-2.5 text-(--black) no-underline hover:bg-(--lightblue) hover:text-(--white)"
+                        >
+                            จัดการคำขอยืมหนังสือ
                         </Link>
                     </div>
                 </div>
