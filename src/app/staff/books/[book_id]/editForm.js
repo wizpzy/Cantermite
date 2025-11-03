@@ -20,17 +20,19 @@ export default function EditForm({ bookData, genreChoices }) {
                 <div className="flex flex-col gap-5">
                     <div className="flex">
                         <div className="flex w-1/2 flex-col gap-2 text-sm">
-                            <span className="font-medium">ชื่อหนังสือ</span>
+                            <label htmlFor="title" className="font-medium">ชื่อหนังสือ</label>
                             <input
                                 name="title"
+                                id="title"
                                 className="w-7/10 rounded-[20px] border-2 border-(--lightgrey1) px-3 py-2 text-(--darkblue)"
                                 placeholder={bookData.title ?? "-"}
                             />
                         </div>
                         <div className="flex w-1/2 flex-col gap-2 text-sm">
-                            <span className="font-medium">ชื่อสำนักพิมพ์</span>
+                            <label htmlFor="publisher" className="font-medium">ชื่อสำนักพิมพ์</label>
                             <input
                                 name="publisher"
+                                id="publisher"
                                 className="w-7/10 rounded-[20px] border-2 border-(--lightgrey1) px-3 py-2 text-(--darkblue)"
                                 placeholder={bookData.publisher ?? "-"}
                             />
@@ -38,21 +40,23 @@ export default function EditForm({ bookData, genreChoices }) {
                     </div>
                     <div className="flex">
                         <div className="flex w-1/2 flex-col gap-2 text-sm">
-                            <span className="font-medium">ชื่อผู้เขียน</span>
+                            <label htmlFor="author" className="font-medium">ชื่อผู้เขียน</label>
                             <input
                                 name="author"
+                                id="author"
                                 className="w-7/10 rounded-[20px] border-2 border-(--lightgrey1) px-3 py-2 text-(--darkblue)"
                                 placeholder={bookData.author ?? "-"}
                             />
                         </div>
                         <div className="flex w-1/2 flex-col gap-2 text-sm">
-                            <span className="font-medium">
+                            <label htmlFor="year" className="font-medium">
                                 ปีที่พิมพ์
                                 <span className="font-normal text-red-400"> {state.yearError ? `*${state.yearError}*` : ""}</span>
-                            </span>
+                            </label>
                             <input
                                 type="number"
                                 name="year"
+                                id="year"
                                 className="w-7/10 rounded-[20px] border-2 border-(--lightgrey1) px-3 py-2 text-(--darkblue)"
                                 placeholder={bookData.year ?? "-"}
                             />
@@ -60,10 +64,11 @@ export default function EditForm({ bookData, genreChoices }) {
                     </div>
                     <div className="flex">
                         <div className="flex w-1/2 flex-col gap-2 text-sm">
-                            <span className="font-medium">หมวดหมู่</span>
+                            <label htmlFor="genre" className="font-medium">หมวดหมู่</label>
                             <div className="relative w-7/10">
                                 <select
                                     name="genre"
+                                    id="genre"
                                     className="w-full rounded-[20px] border-2 border-(--lightgrey1) px-3 py-2 text-(--darkblue) appearance-none"
                                     defaultValue={bookData.genre_name}
                                 >
@@ -77,9 +82,10 @@ export default function EditForm({ bookData, genreChoices }) {
                             </div>
                         </div>
                         <div className="flex w-1/2 flex-col gap-2 text-sm">
-                            <span className="font-medium">ภาษา</span>
+                            <label htmlFor="language" className="font-medium">ภาษา</label>
                             <input
                                 name="language"
+                                id="language"
                                 className="w-7/10 rounded-[20px] border-2 border-(--lightgrey1) px-3 py-2 text-(--darkblue)"
                                 placeholder={bookData.language ?? "-"}
                             />
