@@ -2,7 +2,7 @@
 
 import { getToday, getDueDate } from "@/utils/date";
 import { PackagePlus, SquarePen } from "lucide-react";
-import { sendBorrowRequest } from "@/lib/actions/bookActions";
+import { sendBorrowRequest } from "@/lib/actions/books/sendBorrowRequest";
 import { useActionState } from "react";
 import Image from "next/image";
 import SuccessModal from "@/components/successModal";

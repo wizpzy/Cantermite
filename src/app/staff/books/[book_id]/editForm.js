@@ -1,6 +1,6 @@
 "use client";
 
-import { editBook } from "@/lib/actions/bookActions";
+import { editBook } from "@/lib/actions/books/editBook";
 import { Check, ChevronDown } from "lucide-react";
 import { useActionState } from "react";
 import SuccessModal from "@/components/successModal";
