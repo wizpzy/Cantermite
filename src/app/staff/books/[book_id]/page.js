@@ -17,11 +17,10 @@ export default async function EditBookPage({ params }) {
                 ]}
             />
             <div className="flex justify-center items-center w-full h-full gap-10 rounded-[25px] bg-[white] p-10 shadow-[0_0_45.4px_rgba(0,0,0,0.2)]">
-                
-                    <div className="overflow-hidden w-[350px] h-[560px] rounded-[20px] relative">
-                        <Image src={imageUrl} alt={`${book.title} cover / ${book.image_path}`} fill priority />
-                    </div>
-                    <EditForm bookData={book} genreChoices={genres} />
+                <div className="overflow-hidden w-[350px] h-[560px] rounded-[20px] relative">
+                    <Image src={imageUrl} alt={`${book.title} cover / ${book.image_path}`} fill priority />
+                </div>
+                <EditForm bookData={book} genreChoices={genres} />
             </div>
         </div>
     );
