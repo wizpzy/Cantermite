@@ -1,12 +1,12 @@
-import BreadCrumb from "@/components/breadCrumb";
-import { getAuthSession } from "@/lib/session";
+import { verifySession } from "@/lib/dal";
 import { getSpaceById, getUserById, getUserCurrentTier, getTier } from "@/lib/db";
 import BookingForm from "./bookingForm";
+import BreadCrumb from "@/components/breadCrumb";
 
 export default async function BookingPage({ params }) {
     const { space_id } = await params;
     const space = await getSpaceById(space_id);
-    const session = await getAuthSession();
+    const session = await verifySession();
     const userData = session?.userId ? await getUserById(session.userId, { address: true }) : null;
     const tier = await getUserCurrentTier(session?.userId);
     const tierData = await getTier(tier);

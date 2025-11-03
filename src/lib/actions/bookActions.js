@@ -1,13 +1,13 @@
 "use server";
 
-import { getAuthSession } from "@/lib/session";
 import { getAvailableCopy, getUserById } from "@/lib/db";
 import { randomId } from "@/utils/randomId";
 import { reformatDueDate } from "@/utils/date";
+import { verifySession } from "../dal";
 import prisma from "@/lib/prisma";
 
 export async function sendBorrowRequest(prevstate, formData) {
-    const session = await getAuthSession();
+    const session = await verifySession();
     const userData = session?.userId ? await getUserById(session.userId, { user_id: true }) : null;
     const borrowId = randomId(10);
     const bookId = formData.get("bookId");
@@ -48,7 +48,6 @@ export async function editBook(prevstate, formData) {
     const year = parseInt(formData.get("year"));
     const genreName = formData.get("genre");
     const language = formData.get("language");
-    console.log(genreName)
 
     const bookData = {};
     if (title) bookData.title = title;

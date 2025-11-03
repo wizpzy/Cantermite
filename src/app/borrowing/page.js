@@ -1,9 +1,9 @@
-import { getAuthSession } from "@/lib/session";
+import { verifySession } from "@/lib/dal";
 import prisma from "@/lib/prisma";
 import Table from "./table";
 
 export default async function BorrowingHistoryPage() {
-    const session = await getAuthSession();
+    const session = await verifySession();
     const userId = session?.userId ?? null;
 
     const borrowingHistory = userId ? await prisma.borrowing_detail.findMany({
