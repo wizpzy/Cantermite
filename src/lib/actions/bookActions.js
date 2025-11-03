@@ -5,6 +5,7 @@ import { randomId } from "@/utils/randomId";
 import { reformatDueDate } from "@/utils/date";
 import { verifySession } from "../dal";
 import prisma from "@/lib/prisma";
+import { getYear } from "date-fns";
 
 export async function sendBorrowRequest(prevstate, formData) {
     const session = await verifySession();
@@ -53,7 +54,12 @@ export async function editBook(prevstate, formData) {
     if (title) bookData.title = title;
     if (author) bookData.author = author;
     if (publisher) bookData.publisher = publisher;
-    if (year) bookData.year = parseInt(year);
+    if (year) {
+        if (year > getYear(new Date()))
+            return { success: false, yearError: "กรุณาระบุปีที่ถูกต้อง" }
+        bookData.year = parseInt(year);
+    }
+
     if (language) bookData.language = language;
 
     try {
