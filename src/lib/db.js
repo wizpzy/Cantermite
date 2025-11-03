@@ -11,10 +11,10 @@ export async function getUserById(userId, select = null) {
 
 export async function getUserCurrentTier(userId) {
     return (await prisma.subscription.findFirst({
-        where: { 
+        where: {
             member_id: userId,
             status: "active"
-         },
+        },
         orderBy: { end_date: 'desc' },
         select: { tier: true }
     }))?.tier || "Guest";
@@ -79,16 +79,16 @@ export async function getBookById(bookId) {
 
 export async function getAvailableCopy(bookId) {
     return await prisma.book_copy.findFirst({
-            where: {
-                book_id: bookId,
-                status: "available",
-            },
-        });
+        where: {
+            book_id: bookId,
+            status: "available",
+        },
+    });
 }
 
 export async function getPopularBooks(limit) {
     return await prisma.$queryRaw
-            `
+        `
             SELECT bt.*, COALESCE(COUNT(bd.borrow_id), 0)::int AS borrow_count
             FROM book_title bt
             LEFT JOIN book_copy bc
@@ -106,6 +106,26 @@ export async function getAllGenres(limit) {
     return await prisma.genre.findMany({
         orderBy: { genre_name: 'asc' },
         take: limit
+    });
+}
+
+export async function getBorrowHistory(userId) {
+    return await prisma.borrowing_detail.findMany({
+        where: { member_id: userId },
+        include: {
+            book_copy: {
+                include: {
+                    book_title: {
+                        select: {
+                            title: true,
+                        },
+                    },
+                },
+            },
+        },
+        orderBy: {
+            borrow_date: "desc",
+        },
     });
 }
 
