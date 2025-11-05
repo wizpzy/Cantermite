@@ -6,9 +6,7 @@ import { useActionState } from "react";
 import SuccessModal from "@/components/successModal";
 
 export default function EditForm({ bookData, genreChoices }) {
-    const [state, formAction, isPending] = useActionState(editBook, {
-        success: false,
-    });
+    const [state, formAction, isPending] = useActionState(editBook, {success: false});
 
     return (
         <>
