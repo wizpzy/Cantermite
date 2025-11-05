@@ -4,6 +4,7 @@ import { StepBack, StepForward, SquarePen, Trash2 } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { getBookCover } from "@/utils/imagePath";
 
 export default function Table({ data }) {
     const [page, setPage] = useState(1);
@@ -63,7 +64,7 @@ export default function Table({ data }) {
                                     <td>{book.empty ? "" : ((page - 1) * 5) + index + 1}</td>
                                     <td>
                                         <div className="overflow-hidden h-4/5 rounded-[5px] relative">
-                                            <Image src={book.image_path ? `https://covers.openlibrary.org/b/id/${book.image_path}-S.jpg` : '/noImage.png'} alt={`${book.title} cover`} fill priority />
+                                            <Image src={book.image_path ? getBookCover(book.image_path,'S') : '/noImage.png'} alt={`${book.title} cover`} fill priority />
                                         </div>
                                     </td>
                                     <td className="text-left indent-[5%] overflow-hidden whitespace-nowrap text-ellipsis">{book.empty ? "" : book.title}</td>

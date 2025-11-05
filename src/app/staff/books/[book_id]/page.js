@@ -2,12 +2,13 @@ import { getAllGenres, getBookById } from "@/lib/db";
 import BreadCrumb from "@/components/breadCrumb";
 import Image from "next/image";
 import EditForm from "./editForm";
+import { getBookCover } from "@/utils/imagePath";
 
 export default async function EditBookPage({ params }) {
     const { book_id } = await params;
     const book = await getBookById(book_id);
     const genres = await getAllGenres();
-    const imageUrl = book.image_path ? `https://covers.openlibrary.org/b/id/${book.image_path}-L.jpg` : '/noImage.png';
+    const imageUrl = book.image_path ? getBookCover(book.image_path, 'L') : '/noImage.png';
     return (
         <div className="m-10">
             <BreadCrumb

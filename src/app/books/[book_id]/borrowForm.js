@@ -6,10 +6,11 @@ import { sendBorrowRequest } from "@/lib/actions/books/sendBorrowRequest";
 import { useActionState } from "react";
 import Image from "next/image";
 import SuccessModal from "@/components/successModal";
+import { getBookCover } from "@/utils/imagePath";
 
 export default function BorrowForm({ bookData, userData, tierData }) {
     const [state, formAction, isPending] = useActionState(sendBorrowRequest, { success: false });
-    const imageUrl = bookData.image_path ? `https://covers.openlibrary.org/b/id/${bookData.image_path}-L.jpg` : '/noImage.png';
+    const imageUrl = bookData.image_path ? getBookCover(bookData.image_path, 'L') : '/noImage.png';
     const setDueDate = (e) => {
         const form = e.currentTarget.closest("form");
         const borrowDate = e.target.value;
