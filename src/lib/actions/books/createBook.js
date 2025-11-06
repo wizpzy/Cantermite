@@ -18,7 +18,6 @@ export async function createBook(prevstate, formData) {
     const image = formData.get("imageFile");
     const inputError = {};
     console.log("formData:", formData);
-
     try {
         if (!title) inputError.titleError = "กรุณากรอกข้อมูลให้ครบถ้วน"
         if (!author) inputError.authorError = "กรุณากรอกข้อมูลให้ครบถ้วน"
@@ -50,7 +49,7 @@ export async function createBook(prevstate, formData) {
             }
         });
 
-        if (image) {
+        if (image.size > 0 && image.type.startsWith("image")) {
             const { data, error } = await supabase.storage.from("book_cover").upload(`${bookId}_cover`, image);
             if (error) {
                 throw error;
