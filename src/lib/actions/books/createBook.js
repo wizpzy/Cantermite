@@ -55,7 +55,7 @@ export async function createBook(prevstate, formData) {
             if (error) {
                 throw error;
             }
-            
+
             await prisma.book_title.update({
                 where: {
                     book_id: bookId
@@ -67,7 +67,7 @@ export async function createBook(prevstate, formData) {
         }
 
 
-        return { success: true }
+        return { success: true, title }
     } catch (error) {
         console.log(error);
         return { success: false, error }
