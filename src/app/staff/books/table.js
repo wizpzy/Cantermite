@@ -64,7 +64,7 @@ export default function Table({ data }) {
                                     <td>{book.empty ? "" : ((page - 1) * 5) + index + 1}</td>
                                     <td>
                                         <div className="overflow-hidden h-4/5 rounded-[5px] relative">
-                                            <Image src={book.image_path ? getBookCover(book.image_path,'S') : '/noImage.png'} alt={`${book.title} cover`} fill priority />
+                                            <Image className="object-contain" src={book.image_path ? getBookCover(book.image_path,'S') : '/noImage.png'} alt={`${book.title} cover`} fill priority />
                                         </div>
                                     </td>
                                     <td className="text-left indent-[5%] overflow-hidden whitespace-nowrap text-ellipsis">{book.empty ? "" : book.title}</td>
