@@ -48,6 +48,9 @@ export async function getAllBooks() {
                     }
                 }
             }
+        },
+        orderBy: {
+            title: "asc"
         }
     });
     booksData.map(bookData => {
