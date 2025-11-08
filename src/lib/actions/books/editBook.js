@@ -2,6 +2,7 @@
 
 import { getYear } from "date-fns";
 import prisma from "@/lib/prisma";
+import supabase from "@/lib/supabase";
 
 export async function editBook(prevstate, formData) {
     const bookId = formData.get("bookId");
@@ -11,6 +12,7 @@ export async function editBook(prevstate, formData) {
     const year = parseInt(formData.get("year"));
     const genreName = formData.get("genre");
     const language = formData.get("language");
+    const image = formData.get("imageFile");
 
     const bookData = {};
     if (title) bookData.title = title;
@@ -57,6 +59,23 @@ export async function editBook(prevstate, formData) {
                 }
             });
         }
+
+        if (image.size > 0 && image.type.startsWith("image")) {
+            const { data, error } = await supabase.storage.from("book_cover").upload(`${bookId}_cover`, image, {upsert: true});
+            if (error) {
+                throw error;
+            }
+
+            await prisma.book_title.update({
+                where: {
+                    book_id: bookId
+                },
+                data: {
+                    image_path: `${bookId}_cover`
+                }
+            })
+        }
+
         return { success: true };
     } catch (error) {
         console.log(error)
