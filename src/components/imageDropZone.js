@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 function abbreviateFileSize(size) {
@@ -11,13 +11,19 @@ function abbreviateFileSize(size) {
         return (size / 1024).toFixed(2) + " KB";
 }
 
-export default function ImageDropZone({ name }) {
+export default function ImageDropZone({ name, defaultImage }) {
     const [file, setFile] = useState(null);
 
     const discardFile = (e) => {
         e.stopPropagation(); // prevent triggering the dropzone
         setFile(null);
     };
+
+    useEffect(() => {
+        if (defaultImage) {
+            setFile(defaultImage);
+        }
+    }, [defaultImage])
 
     const onDrop = useCallback((acceptedFiles) => {
         acceptedFiles.forEach((file) => {
