@@ -14,13 +14,11 @@ export async function createBook(prevstate, formData) {
     const language = formData.get("language");
     const image = formData.get("imageFile");
     const inputError = {};
-    console.log("formData:", formData);
     try {
         if (!title) inputError.titleError = "กรุณากรอกข้อมูลให้ครบถ้วน"
         if (!author) inputError.authorError = "กรุณากรอกข้อมูลให้ครบถ้วน"
         if (!year) inputError.yearError = "กรุณากรอกข้อมูลให้ครบถ้วน"
         if (!language) inputError.languageError = "กรุณากรอกข้อมูลให้ครบถ้วน"
-
         if (!title || !author || !year || !language)
             throw inputError
 
