@@ -1,12 +1,16 @@
 "use client";
 
 import { StepBack, StepForward, SquarePen, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getBookCover } from "@/utils/imagePath";
+import ConfirmModal from "@/components/confirmModal";
+import { deleteBook } from "@/lib/actions/books/deleteBook";
 
 export default function Table({ data }) {
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [selectedBook, setSelectedBook] = useState(null);
     const [page, setPage] = useState(1);
     const minPage = 1;
     const maxPage = Math.ceil(data.length / 5);
@@ -16,6 +20,11 @@ export default function Table({ data }) {
     const rows = data.slice((page - 1) * 5, page * 5);
     while (rows.length < 5) {
         rows.push({ empty: true });
+    }
+
+    const handleDeleteClick = (book) => {
+        setSelectedBook(book);
+        setShowDeleteModal(true);
     }
 
     return (
@@ -63,25 +72,32 @@ export default function Table({ data }) {
                                 <tr key={index} className="h-[20%] max-h-[20%]">
                                     <td>{book.empty ? "" : ((page - 1) * 5) + index + 1}</td>
                                     <td>
-                                        <div className="overflow-hidden h-4/5 rounded-[5px] relative">
-                                            <Image className="object-contain" src={book.image_path ? getBookCover(book.image_path,'S') : '/noImage.png'} alt={`${book.title} cover`} fill priority />
-                                        </div>
+                                        {book.empty ? <></> :
+                                            <div className="overflow-hidden h-4/5 rounded-[5px] relative">
+                                                <Image className="object-contain" src={book.image_path ? getBookCover(book.image_path, 'S') : '/noImage.png'} alt={`${book.title} cover`} fill priority />
+                                            </div>
+                                        }
                                     </td>
                                     <td className="text-left indent-[5%] overflow-hidden whitespace-nowrap text-ellipsis">{book.empty ? "" : book.title}</td>
                                     <td>
                                         <p className="overflow-hidden line-clamp-2 text-ellipsis">{book.empty ? "" : book.author}</p>
-                                        </td>
+                                    </td>
                                     <td>{book.empty ? "" : book.publisher ?? "-"}</td>
                                     <td>{book.empty ? "" : book.year ?? "-"}</td>
                                     <td>{book.empty ? "" : book.language}</td>
                                     <td>{book.empty ? "" : book.genre_name}</td>
                                     <td>
-                                        <div className="flex justify-evenly items-center">
-                                            <Link href={`/staff/books/${book.book_id}`}>
-                                                <SquarePen color="var(--darkgrey1)" strokeWidth={3} />
-                                            </Link>
-                                            <Trash2 color="var(--cancel)" strokeWidth={3} />
-                                        </div>
+                                        {book.empty ? <></> :
+                                            <div className="flex justify-evenly items-center">
+                                                <Link href={`/staff/books/${book.book_id}`}>
+                                                    <SquarePen color="var(--darkgrey1)" strokeWidth={3} />
+                                                </Link>
+                                                <button className="hover:cursor-pointer" onClick={() => handleDeleteClick(book)}>
+                                                    <Trash2 color="var(--cancel)" strokeWidth={3} />
+                                                </button>
+                                            </div>
+                                        }
+
                                     </td>
                                 </tr>
                             ))
@@ -99,6 +115,9 @@ export default function Table({ data }) {
                     <StepForward size={28} />
                 </button>
             </div>
+            {showDeleteModal && (
+                <ConfirmModal onCancel={() => setShowDeleteModal(false)} onConfirm={() => deleteBook(selectedBook.book_id)} text={`ต้องการลบหนังสือ ${selectedBook.title} หรือไม่`} />
+            )}
         </>
     );
 }
