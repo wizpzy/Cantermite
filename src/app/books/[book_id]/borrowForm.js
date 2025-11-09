@@ -22,7 +22,7 @@ export default function BorrowForm({ bookData, userData, tierData }) {
             <form className="w-full flex flex-col gap-10 bg-[white] shadow-[0_0_45.4px_rgba(0,0,0,0.2)] p-10 rounded-[25px]" action={formAction}>
                 <div className="flex gap-10">
                     <div className="overflow-hidden w-[400px] h-[640px] rounded-[20px] relative">
-                        <Image src={imageUrl} alt={`${bookData.title} cover / ${bookData.image_path}`} fill priority />
+                        <Image className="object-cover" src={imageUrl} alt={`${bookData.title} cover / ${bookData.image_path}`} fill priority suppressHydrationWarning />
                     </div>
 
                     <div className="w-[calc(100%_-_440px)] flex flex-col gap-10">
@@ -107,7 +107,7 @@ export default function BorrowForm({ bookData, userData, tierData }) {
             </form>
 
             {state.success && (
-                <StatusModal status="success" text="ส่งคำขอสำเร็จแล้ว" onClose={() => location.reload()} />
+                <StatusModal success={true} text="ส่งคำขอสำเร็จแล้ว" onClose={() => location.reload()} />
             )}
         </>
     );

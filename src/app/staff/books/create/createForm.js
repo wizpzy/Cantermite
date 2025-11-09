@@ -20,7 +20,7 @@ export default function CreateForm({ genreChoices }) {
                             <ImageDropZone name="imageFile" />
                         </div>
                         <div className="flex flex-col gap-8 w-13/20">
-                            <div className="flex flex-col gap-4 w-7/10">
+                            <div className="flex flex-col gap-4">
                                 <label htmlFor="title" className="font-medium text-sm">ชื่อหนังสือ <span className="text-red-400">* {state.error?.titleError ? state.error.titleError + " *" : ""}</span> </label>
                                 <input
                                     name="title"
@@ -29,7 +29,7 @@ export default function CreateForm({ genreChoices }) {
                                     placeholder="ชื่อหนังสือ"
                                 />
                             </div>
-                            <div className="flex flex-col gap-4 w-7/10">
+                            <div className="flex flex-col gap-4">
                                 <label htmlFor="author" className="font-medium text-sm">ชื่อผู้เขียน <span className="text-red-400">* {state.error?.authorError ? state.error.authorError + " *" : ""}</span> </label>
                                 <input
                                     name="author"
@@ -38,7 +38,7 @@ export default function CreateForm({ genreChoices }) {
                                     placeholder="ชื่อผู้เขียน"
                                 />
                             </div>
-                            <div className="flex flex-col gap-4 w-7/10">
+                            <div className="flex flex-col gap-4">
                                 <label htmlFor="publisher" className="font-medium text-sm">ชื่อสำนักพิมพ์</label>
                                 <input
                                     name="publisher"
@@ -47,7 +47,7 @@ export default function CreateForm({ genreChoices }) {
                                     placeholder="ชื่อสำนักพิมพ์"
                                 />
                             </div>
-                            <div className="flex gap-7 w-7/10 justify-between">
+                            <div className="flex gap-7 justify-between">
                                 <div className="flex flex-col gap-4 flex-1">
                                     <label htmlFor="year" className="font-medium text-sm">ปีที่พิมพ์ <span className="text-red-400">* {state.error?.yearError ? state.error.yearError + " *" : ""}</span> </label>
                                     <input
@@ -65,6 +65,16 @@ export default function CreateForm({ genreChoices }) {
                                         id="language"
                                         className={`rounded-[20px] border-2 border-(--lightgrey1) px-5 py-3 text-(--darkblue) text-sm ${state.error?.languageError ? "bg-red-200" : ""}`}
                                         placeholder="ภาษา"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-4 flex-1">
+                                    <label htmlFor="amount" className="font-medium text-sm">จำนวนเล่ม <span className="text-red-400">* {state.error?.amountError ? state.error.amountError + " *" : ""}</span> </label>
+                                    <input
+                                        type="number"
+                                        name="amount"
+                                        id="amount"
+                                        className={`rounded-[20px] border-2 border-(--lightgrey1) px-5 py-3 text-(--darkblue) text-sm ${state.error?.amountError ? "bg-red-200" : ""}`}
+                                        placeholder="จำนวนเล่ม"
                                     />
                                 </div>
                                 <div className="flex flex-col gap-4 flex-1">
@@ -94,7 +104,7 @@ export default function CreateForm({ genreChoices }) {
                 </form>
             </div>
             {state.success && (
-                <StatusModal status="success" text={`สร้างหนังสือ ${state.title} สำเร็จแล้ว`} onClose={() => location.reload()} />
+                <StatusModal success={true} text={`สร้างหนังสือ ${state.title} สำเร็จแล้ว`} onClose={() => location.reload()} />
             )}
         </>
     );

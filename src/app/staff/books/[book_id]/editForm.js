@@ -10,7 +10,6 @@ import { getBookCover } from "@/utils/imagePath";
 export default function EditForm({ bookData, genreChoices }) {
     const [state, formAction, isPending] = useActionState(editBook, { success: false });
     const imageUrl = bookData.image_path ? getBookCover(bookData.image_path, 'L') : '/noImage.png';
-    console.log(imageUrl)
 
     return (
         <>
@@ -98,7 +97,7 @@ export default function EditForm({ bookData, genreChoices }) {
                 </form>
             </div>
             {state.success && (
-                <StatusModal status="success" text={`แก้ไขหนังสือ ${state.title ?? bookData.title} สำเร็จแล้ว`} onClose={() => location.reload()} />
+                <StatusModal success={true} text={`แก้ไขหนังสือ ${state.title ?? bookData.title} สำเร็จแล้ว`} onClose={() => location.reload()} />
             )}
         </>
     );
