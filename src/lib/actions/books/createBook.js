@@ -12,14 +12,17 @@ export async function createBook(prevstate, formData) {
     const year = parseInt(formData.get("year"));
     const genreName = formData.get("genre");
     const language = formData.get("language");
+    const amount = formData.get("amount");
     const image = formData.get("imageFile");
     const inputError = {};
+
     try {
         if (!title) inputError.titleError = "กรุณากรอกข้อมูลให้ครบถ้วน"
         if (!author) inputError.authorError = "กรุณากรอกข้อมูลให้ครบถ้วน"
         if (!year) inputError.yearError = "กรุณากรอกข้อมูลให้ครบถ้วน"
         if (!language) inputError.languageError = "กรุณากรอกข้อมูลให้ครบถ้วน"
-        if (!title || !author || !year || !language)
+        if (!amount) inputError.amountError = "กรุณากรอกข้อมูลให้ครบถ้วน"
+        if (!title || !author || !year || !language || !amount)
             throw inputError
 
         const newBook = await prisma.book_title.create({
@@ -60,6 +63,13 @@ export async function createBook(prevstate, formData) {
             })
         }
 
+        await prisma.book_copy.createMany({
+            data: Array.from({ length: amount }, () => ({
+                copy_id: randomId(10),
+                book_id: bookId,
+                status: "available"
+            }))
+        })
 
         return { success: true, title }
     } catch (error) {
