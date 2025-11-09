@@ -97,7 +97,6 @@ export default function Table({ data }) {
                                                 </button>
                                             </div>
                                         }
-
                                     </td>
                                 </tr>
                             ))
