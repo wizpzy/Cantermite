@@ -58,11 +58,11 @@ export default function ImageDropZone({ name, defaultImage }) {
 
     return (
         <div
-            className="bg-(white) h-full w-full rounded-[20px] border-2 border-dashed border-(--lightgrey1)"
+            className="bg-(--white) h-full w-full rounded-[20px] border-2 border-dashed border-(--lightgrey1)"
             {...getRootProps()}
         >
             <input name={name} {...getInputProps()} />
-            <div className="flex h-full w-full flex-col items-center justify-center p-10">
+            <div className="flex h-full w-full flex-col items-center justify-center p-10 bg-transparent">
                 {file ? (
                     <div className="flex flex-col h-full w-full items-center gap-4 relative">
                         <button
