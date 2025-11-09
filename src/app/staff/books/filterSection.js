@@ -11,7 +11,7 @@ export default function FilterSection({ booksData }) {
 
     useEffect(() => {
         setFilteredData(booksData.filter((book) => {
-            return book.title.startsWith(filter);
+            return book.title.toLowerCase().startsWith(filter.toLowerCase());
         }))
     }, [filter])
 
