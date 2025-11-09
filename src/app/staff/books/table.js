@@ -74,7 +74,7 @@ export default function Table({ data }) {
                                     <td>
                                         {book.empty ? <></> :
                                             <div className="overflow-hidden h-4/5 rounded-[5px] relative">
-                                                <Image className="object-contain" src={book.image_path ? getBookCover(book.image_path, 'S') : '/noImage.png'} alt={`${book.title} cover`} fill priority />
+                                                <Image className="object-contain" src={book.image_path ? getBookCover(book.image_path, 'S') : '/noImage.png'} alt={`${book.title} cover`} fill priority suppressHydrationWarning />
                                             </div>
                                         }
                                     </td>
