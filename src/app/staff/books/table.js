@@ -27,6 +27,11 @@ export default function Table({ data }) {
         setShowDeleteModal(true);
     }
 
+    const handleConfirmDelete = () => {
+        deleteBook(selectedBook.book_id);
+        setShowDeleteModal(false);
+    }
+
     return (
         <>
             <div className="w-full h-full border-(--lightgrey1) p-[30px] rounded-[20px] border-2 border-solid">
@@ -115,7 +120,7 @@ export default function Table({ data }) {
                 </button>
             </div>
             {showDeleteModal && (
-                <ConfirmModal onCancel={() => setShowDeleteModal(false)} onConfirm={() => deleteBook(selectedBook.book_id)} text={`ต้องการลบหนังสือ ${selectedBook.title} หรือไม่`} />
+                <ConfirmModal onCancel={() => setShowDeleteModal(false)} onConfirm={() => handleConfirmDelete()} text={`ต้องการลบหนังสือ ${selectedBook.title} หรือไม่`} />
             )}
         </>
     );
