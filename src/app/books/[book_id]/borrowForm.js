@@ -5,7 +5,7 @@ import { PackagePlus, SquarePen } from "lucide-react";
 import { sendBorrowRequest } from "@/lib/actions/books/sendBorrowRequest";
 import { useActionState } from "react";
 import Image from "next/image";
-import SuccessModal from "@/components/successModal";
+import StatusModal from "@/components/statusModal";
 import { getBookCover } from "@/utils/imagePath";
 
 export default function BorrowForm({ bookData, userData, tierData }) {
@@ -107,7 +107,7 @@ export default function BorrowForm({ bookData, userData, tierData }) {
             </form>
 
             {state.success && (
-                <SuccessModal text="ส่งคำขอสำเร็จแล้ว" onClose={() => location.reload()} />
+                <StatusModal status="success" text="ส่งคำขอสำเร็จแล้ว" onClose={() => location.reload()} />
             )}
         </>
     );

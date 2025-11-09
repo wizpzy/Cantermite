@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { useActionState } from "react";
 import ImageDropZone from "@/components/imageDropZone";
 import { createBook } from "@/lib/actions/books/createBook";
-import SuccessModal from "@/components/successModal";
+import StatusModal from "@/components/statusModal";
 
 export default function CreateForm({ genreChoices }) {
     const [state, formAction, isPending] = useActionState(createBook, { success: false });
@@ -94,7 +94,7 @@ export default function CreateForm({ genreChoices }) {
                 </form>
             </div>
             {state.success && (
-                <SuccessModal text={`สร้างหนังสือ ${state.title} สำเร็จแล้ว`} onClose={() => location.reload()} />
+                <StatusModal status="success" text={`สร้างหนังสือ ${state.title} สำเร็จแล้ว`} onClose={() => location.reload()} />
             )}
         </>
     );

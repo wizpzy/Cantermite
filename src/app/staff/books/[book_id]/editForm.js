@@ -4,7 +4,7 @@ import { editBook } from "@/lib/actions/books/editBook";
 import { Check, ChevronDown } from "lucide-react";
 import { useActionState } from "react";
 import ImageDropZone from "@/components/imageDropZone";
-import SuccessModal from "@/components/successModal";
+import StatusModal from "@/components/statusModal";
 import { getBookCover } from "@/utils/imagePath";
 
 export default function EditForm({ bookData, genreChoices }) {
@@ -98,7 +98,7 @@ export default function EditForm({ bookData, genreChoices }) {
                 </form>
             </div>
             {state.success && (
-                <SuccessModal text={`แก้ไขหนังสือ ${state.title ?? bookData.title} สำเร็จแล้ว`} onClose={() => location.reload()} />
+                <StatusModal status="success" text={`แก้ไขหนังสือ ${state.title ?? bookData.title} สำเร็จแล้ว`} onClose={() => location.reload()} />
             )}
         </>
     );
