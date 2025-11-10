@@ -1,16 +1,20 @@
 "use client";
 
 import { StepBack, StepForward, SquarePen, Trash2 } from "lucide-react";
-import { use, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getBookCover } from "@/utils/imagePath";
 import ConfirmModal from "@/components/confirmModal";
 import { deleteBook } from "@/lib/actions/books/deleteBook";
+import StatusModal from "@/components/statusModal";
 
 export default function Table({ data }) {
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showStatusModal, setShowStatusModal] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);
+    const [deleteState, setDeleteState] = useState({});
+
     const [page, setPage] = useState(1);
     const minPage = 1;
     const maxPage = Math.ceil(data.length / 5);
@@ -24,12 +28,13 @@ export default function Table({ data }) {
 
     const handleDeleteClick = (book) => {
         setSelectedBook(book);
-        setShowDeleteModal(true);
+        setShowConfirmModal(true);
     }
 
-    const handleConfirmDelete = () => {
-        deleteBook(selectedBook.book_id);
-        setShowDeleteModal(false);
+    const handleConfirmDelete = async () => {
+        setDeleteState(await deleteBook(selectedBook.book_id));
+        setShowConfirmModal(false);
+        setShowStatusModal(true);
     }
 
     return (
@@ -119,8 +124,11 @@ export default function Table({ data }) {
                     <StepForward size={28} />
                 </button>
             </div>
-            {showDeleteModal && (
-                <ConfirmModal onCancel={() => setShowDeleteModal(false)} onConfirm={() => handleConfirmDelete()} text={`ต้องการลบหนังสือ ${selectedBook.title} หรือไม่`} />
+            {showConfirmModal && (
+                <ConfirmModal onCancel={() => setShowConfirmModal(false)} onConfirm={() => handleConfirmDelete()} text={`ต้องการลบหนังสือ ${selectedBook.title} หรือไม่`} />
+            )}
+            {showStatusModal && (
+                <StatusModal success={deleteState.success} onClose={() => location.reload()} text={`ไม่สามารถลบหนังสือได้ เนื่องจาก${deleteState.message}`} />
             )}
         </>
     );

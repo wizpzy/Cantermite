@@ -5,13 +5,36 @@ import supabase from "@/lib/supabase";
 
 export async function deleteBook(bookId) {
     try {
-        await prisma.book_title.delete({
+        const borrowedCopy = await prisma.book_copy.findFirst({
             where: {
-                book_id: bookId
+                book_id: bookId,
+                status: "borrowed"
             }
         });
 
-        await supabase.storage.from("book_cover").remove(`${bookId}_cover`);
+        if (borrowedCopy)
+            return { success: false, message: "มีสมาชิกกำลังยืมหนังสือนี้อยู่"}
+
+        await prisma.book_title.update({
+            where: {
+                book_id: bookId
+            },
+            data: {
+                is_deleted: true,
+                deleted_at: new Date()
+            }
+        });
+
+        await prisma.book_copy.updateMany({
+            data: {
+                status: "deleted"
+            },
+            where: {
+                book_id: bookId
+            }
+        })
+
+        // await supabase.storage.from("book_cover").remove(`${bookId}_cover`);
     } catch (error) {
         console.log(error);
     }
