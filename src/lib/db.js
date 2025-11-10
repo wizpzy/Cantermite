@@ -49,6 +49,9 @@ export async function getAllBooks() {
                 }
             }
         },
+        where: {
+            is_deleted: false
+        },
         orderBy: {
             title: "asc"
         }
