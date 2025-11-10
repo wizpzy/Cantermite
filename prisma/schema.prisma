@@ -34,6 +34,8 @@ model book_title {
   page       Int?
   image_path String?
   book_id    String       @id @db.Char(6)
+  is_deleted Boolean?     @default(false)
+  deleted_at DateTime?    @db.Timestamptz(6)
   book_copy  book_copy[]
   book_genre book_genre[]
 }
