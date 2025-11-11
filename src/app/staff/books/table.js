@@ -128,7 +128,7 @@ export default function Table({ data }) {
                 <ConfirmModal onCancel={() => setShowConfirmModal(false)} onConfirm={() => handleConfirmDelete()} text={`ต้องการลบหนังสือ ${selectedBook.title} หรือไม่`} />
             )}
             {showStatusModal && (
-                <StatusModal success={deleteState.success} onClose={() => location.reload()} text={`ไม่สามารถลบหนังสือได้ เนื่องจาก${deleteState.message}`} />
+                <StatusModal success={deleteState?.success} onClose={() => location.reload()} text={deleteState?.message} />
             )}
         </>
     );

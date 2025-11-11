@@ -13,9 +13,9 @@ export async function deleteBook(bookId) {
         });
 
         if (borrowedCopy)
-            return { success: false, message: "มีสมาชิกกำลังยืมหนังสือนี้อยู่"}
+            return { success: false, message: "ไม่สามารถลบหนังสือได้ เนื่องจากมีสมาชิกกำลังยืมหนังสือนี้อยู่"}
 
-        await prisma.book_title.update({
+        const bookInfo = await prisma.book_title.update({
             where: {
                 book_id: bookId
             },
@@ -35,7 +35,9 @@ export async function deleteBook(bookId) {
         })
 
         // await supabase.storage.from("book_cover").remove(`${bookId}_cover`);
+        return { success: true, message: `ลบหนังสือ ${bookInfo.title} สำเร็จ`}
     } catch (error) {
         console.log(error);
+        return { success: false, message: error }
     }
 }
