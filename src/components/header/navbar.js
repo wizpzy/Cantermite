@@ -19,7 +19,7 @@ export default function NavBar({ role }) {
                             จัดการหนังสือ
                         </Link>
                         <Link
-                            href="/"
+                            href="/staff/genres"
                             className="block cursor-pointer px-5 py-2.5 text-(--black) no-underline hover:bg-(--lightblue) hover:text-(--white)"
                         >
                             จัดการหมวดหมู่หนังสือ

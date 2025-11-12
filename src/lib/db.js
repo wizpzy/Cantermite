@@ -115,6 +115,14 @@ export async function getAllGenres(limit) {
     });
 }
 
+export async function getGenreById(genreId) {
+    return await prisma.genre.findUnique({
+        where: {
+            genre_id: genreId
+        }
+    });
+}
+
 export async function getBorrowHistory(userId) {
     return await prisma.borrowing_detail.findMany({
         where: { member_id: userId },
