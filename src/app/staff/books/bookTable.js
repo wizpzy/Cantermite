@@ -9,7 +9,7 @@ import ConfirmModal from "@/components/confirmModal";
 import { deleteBook } from "@/lib/actions/books/deleteBook";
 import StatusModal from "@/components/statusModal";
 
-export default function Table({ data }) {
+export default function BookTable({ data }) {
     const [showStatusModal, setShowStatusModal] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);

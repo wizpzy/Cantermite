@@ -6,7 +6,7 @@ import ImageDropZone from "@/components/imageDropZone";
 import { createBook } from "@/lib/actions/books/createBook";
 import StatusModal from "@/components/statusModal";
 
-export default function CreateForm({ genreChoices }) {
+export default function CreateBookForm({ genreChoices }) {
     const [state, formAction, isPending] = useActionState(createBook, { success: false });
 
     return (

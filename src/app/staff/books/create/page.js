@@ -1,6 +1,6 @@
 import { getAllGenres } from "@/lib/db";
 import BreadCrumb from "@/components/breadCrumb";
-import CreateForm from "./createForm";
+import CreateBookForm from "./createBookForm";
 
 export default async function createBookPage() {
     const genres = await getAllGenres();
@@ -12,7 +12,7 @@ export default async function createBookPage() {
                     { label: "เพิ่มหนังสือ" },
                 ]}
             />
-            <CreateForm genreChoices={genres} />
+            <CreateBookForm genreChoices={genres} />
         </div>
     );
 }

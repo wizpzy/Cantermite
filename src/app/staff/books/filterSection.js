@@ -3,7 +3,7 @@
 import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Table from "./table";
+import BookTable from "./bookTable";
 
 export default function FilterSection({ booksData }) {
     const [filter, setFilter] = useState("");
@@ -32,7 +32,7 @@ export default function FilterSection({ booksData }) {
                     เพิ่มหนังสือ
                 </Link>
             </div>
-            <Table data={filteredData} />
+            <BookTable data={filteredData} />
         </>
     );
 }

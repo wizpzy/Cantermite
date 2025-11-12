@@ -7,7 +7,7 @@ import ImageDropZone from "@/components/imageDropZone";
 import StatusModal from "@/components/statusModal";
 import { getBookCover } from "@/utils/imagePath";
 
-export default function EditForm({ bookData, genreChoices }) {
+export default function EditBookForm({ bookData, genreChoices }) {
     const [state, formAction, isPending] = useActionState(editBook, { success: false });
     const imageUrl = bookData.image_path ? getBookCover(bookData.image_path, 'L') : '/noImage.png';
 

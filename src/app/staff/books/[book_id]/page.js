@@ -1,6 +1,6 @@
 import { getAllGenres, getBookById } from "@/lib/db";
 import BreadCrumb from "@/components/breadCrumb";
-import EditForm from "./editForm";
+import EditBookForm from "./editBookForm";
 
 export default async function EditBookPage({ params }) {
     const { book_id } = await params;
@@ -14,7 +14,7 @@ export default async function EditBookPage({ params }) {
                     { label: "ดูรายละเอียดหนังสือ" },
                 ]}
             />
-            <EditForm bookData={book} genreChoices={genres} />
+            <EditBookForm bookData={book} genreChoices={genres} />
         </div>
     );
 }
