@@ -1,10 +1,18 @@
 "use client";
 
+import { deleteGenre } from "@/lib/actions/genres/deleteGenre";
 import { SquarePen, Trash2, StepBack, StepForward } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import ConfirmModal from "@/components/confirmModal";
+import StatusModal from "@/components/statusModal";
 
 export default function GenreTable({ data }) {
+    const [showStatusModal, setShowStatusModal] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [selectedGenre, setSelectedGenre] = useState(null);
+    const [deleteState, setDeleteState] = useState({});
+
     const [page, setPage] = useState(1);
     const minPage = 1;
     const maxPage = Math.ceil(data.length / 8);
@@ -14,6 +22,17 @@ export default function GenreTable({ data }) {
     const rows = data.slice((page - 1) * 8, page * 8);
     while (rows.length < 8) {
         rows.push({ empty: true });
+    }
+
+    const handleDeleteClick = (genre) => {
+        setSelectedGenre(genre);
+        setShowConfirmModal(true);
+    }
+
+    const handleConfirmDelete = async () => {
+        setDeleteState(await deleteGenre(selectedGenre.genre_id));
+        setShowConfirmModal(false);
+        setShowStatusModal(true);
     }
 
     return (
@@ -59,7 +78,7 @@ export default function GenreTable({ data }) {
                                                 <Link href={`/staff/genres/${genre.genre_id}`}>
                                                     <SquarePen color="var(--darkgrey1)" strokeWidth={3} />
                                                 </Link>
-                                                <button className="hover:cursor-pointer" onClick={() => { }}>
+                                                <button className="hover:cursor-pointer" onClick={() => handleDeleteClick(genre)}>
                                                     <Trash2 color="var(--cancel)" strokeWidth={3} />
                                                 </button>
                                             </div>
@@ -81,6 +100,12 @@ export default function GenreTable({ data }) {
                     <StepForward size={28} />
                 </button>
             </div>
+            {showConfirmModal && (
+                <ConfirmModal onCancel={() => setShowConfirmModal(false)} onConfirm={() => handleConfirmDelete()} text={`ต้องการลบหมวดหมู่ ${selectedGenre.genre_name} หรือไม่`} />
+            )}
+            {showStatusModal && (
+                <StatusModal success={deleteState?.success} onClose={() => location.reload()} text={deleteState?.message} />
+            )}
         </>
     );
 }

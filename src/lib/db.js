@@ -111,6 +111,9 @@ export async function getPopularBooks(limit) {
 export async function getAllGenres(limit) {
     return await prisma.genre.findMany({
         orderBy: { genre_name: 'asc' },
+        where: {
+            is_deleted: false
+        },
         take: limit
     });
 }
