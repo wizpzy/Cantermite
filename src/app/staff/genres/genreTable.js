@@ -75,7 +75,7 @@ export default function GenreTable({ data }) {
                                     <td>
                                         {genre.empty ? <></> :
                                             <div className="flex justify-evenly items-center">
-                                                <Link href={`/staff/genres/${genre.genre_id}`}>
+                                                <Link href={"/staff/genres/create"}>
                                                     <SquarePen color="var(--darkgrey1)" strokeWidth={3} />
                                                 </Link>
                                                 <button className="hover:cursor-pointer" onClick={() => handleDeleteClick(genre)}>
